@@ -9,8 +9,9 @@
       "bonusPoints": 15,
       "helpText": [
         "👕 Kläder = clothes på engelska!",
-        "tröja = shirt | byxor = pants | skor = shoes",
+        "tröja = jumper | byxor = trousers | skor = shoes",
         "hatt = hat | klänning = dress | jacka = jacket",
+        "Obs! Shirt = skjorta. Pants betyder kalsonger – byxor heter trousers!",
         "Tips: Många klädesplagg liknar svenska ord!"
       ],
       "exercises": [
@@ -19,13 +20,13 @@
           "type": "multiple-choice",
           "question": "Vad heter 'tröja' på engelska?",
           "options": [
-            "shirt",
-            "pants",
+            "jumper",
+            "trousers",
             "shoes",
             "hat"
           ],
           "correctIndex": 0,
-          "explanation": "Tröja = shirt. I wear a shirt."
+          "explanation": "Tröja = jumper. Obs! Shirt betyder skjorta. I wear a warm jumper."
         },
         {
           "id": "lag-v6-2",
@@ -33,12 +34,12 @@
           "question": "Vad heter 'byxor' på engelska?",
           "options": [
             "dress",
-            "pants",
+            "trousers",
             "jacket",
             "socks"
           ],
           "correctIndex": 1,
-          "explanation": "Byxor = pants. He wears pants."
+          "explanation": "Byxor = trousers. Obs! Pants betyder kalsonger. He wears trousers."
         },
         {
           "id": "lag-v6-3",
@@ -72,7 +73,7 @@
           "question": "Vad heter 'klänning' på engelska?",
           "options": [
             "skirt",
-            "pants",
+            "trousers",
             "dress",
             "blouse"
           ],
@@ -508,7 +509,7 @@
             "car",
             "bus",
             "van",
-            "truck"
+            "lorry"
           ],
           "correctIndex": 0,
           "explanation": "Bil = car. My car is blue."
@@ -1169,7 +1170,7 @@
       "bonusPoints": 15,
       "helpText": [
         "👨‍👩‍👧‍👦 Familjeord på engelska är viktiga!",
-        "mamma = mum / mom | pappa = dad / father",
+        "mamma = mum | pappa = dad / father",
         "syster = sister | bror = brother",
         "farmor/mormor = grandmother | farfar/morfar = grandfather",
         "farbror = uncle | faster/moster = aunt | kusin = cousin"
@@ -1186,7 +1187,7 @@
             "gran"
           ],
           "correctIndex": 2,
-          "explanation": "Mamma = mum (brittisk engelska) eller mom (amerikansk engelska)."
+          "explanation": "Mamma = mum. My mum is kind!"
         },
         {
           "id": "lag-v3-2",
@@ -1233,7 +1234,7 @@
           "sentence": "Min ___ (farmor/mormor på engelska) bakar kakor.",
           "answer": "grandmother",
           "hint": "Farmor/mormor = g _ _ _ _ _ _ _ _ _ _",
-          "explanation": "Grandmother = farmor eller mormor. Grandmother bakes cookies!"
+          "explanation": "Grandmother = farmor eller mormor. Grandmother bakes cakes!"
         },
         {
           "id": "lag-v3-6",
@@ -1930,10 +1931,10 @@
         {
           "id": "lag-g2-7",
           "type": "fill-in-blank",
-          "sentence": "The bird ___ colorful feathers.",
+          "sentence": "The bird ___ colourful feathers.",
           "answer": "has",
           "hint": "Ramsa: I have – You have – He/She/It has – We/They have",
-          "explanation": "The bird = it. Vi använder 'has'. The bird has colorful feathers."
+          "explanation": "The bird = it. Vi använder 'has'. The bird has colourful feathers."
         },
         {
           "id": "lag-g2-8",
@@ -5299,7 +5300,7 @@
         {
           "id": "lag-sa-7",
           "type": "multiple-choice",
-          "question": "There aren't ___ cookies left.",
+          "question": "There aren't ___ biscuits left.",
           "options": [
             "some",
             "a",
@@ -5307,7 +5308,7 @@
             "any"
           ],
           "correctIndex": 3,
-          "explanation": "Negation (aren't) → any: 'There aren't any cookies left.'"
+          "explanation": "Negation (aren't) → any: 'There aren't any biscuits left.'"
         },
         {
           "id": "lag-sa-8",
@@ -6203,9 +6204,6 @@
           "type": "fill-in-blank",
           "sentence": "A: What ___ is the sky? B: It is blue!",
           "answer": "colour",
-          "alternativeAnswers": [
-            "color"
-          ],
           "hint": "Frågeord för färg.",
           "explanation": "'What colour is the sky?' = Vilken färg har himlen?"
         }
@@ -6326,13 +6324,13 @@
           "type": "multiple-choice",
           "question": "Vad heter 'tröja' på engelska?",
           "options": [
-            "shirt",
-            "pants",
+            "jumper",
+            "trousers",
             "shoes",
             "hat"
           ],
           "correctIndex": 0,
-          "explanation": "Tröja = shirt. I wear a shirt."
+          "explanation": "Tröja = jumper. Obs! Shirt betyder skjorta. I wear a warm jumper."
         },
         {
           "id": "lag-sluttest-2--lag-v7-1",
@@ -6407,7 +6405,7 @@
             "car",
             "bus",
             "van",
-            "truck"
+            "lorry"
           ],
           "correctIndex": 0,
           "explanation": "Bil = car. My car is blue."
@@ -6419,7 +6417,7 @@
           "question": "Vad heter detta på engelska?",
           "options": [
             "Bread",
-            "Cookie",
+            "Biscuit",
             "Pizza",
             "Cake"
           ],

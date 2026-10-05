@@ -1,33 +1,13 @@
 // ─── Godtagbara svarsvarianter ────────────────────────────────────────────────
 // Elever ska inte få fel för att de valt en annan korrekt engelsk form än den
-// som råkar stå i facit. Tabellen är tvåvägs: står "colour" i facit godkänns
-// "color", och tvärtom.
+// som råkar stå i facit, t.ex. "do not" i stället för "don't". Tabellen är
+// tvåvägs. Appen lär ut brittisk engelska, så amerikansk stavning och
+// amerikanska ord (color, pants …) finns inte med och godkänns inte.
 //
 // Läggs varianter till här gäller de i ALLA lucktextövningar direkt – ingen
 // behöver redigera enskilda uppgifter.
 
 const GROUPS: string[][] = [
-  // ── Brittisk ↔ amerikansk stavning ─────────────────────────────────────────
-  ["analysed", "analyzed"],
-  ["criticised", "criticized"],
-  ["organised", "organized"],
-  ["realised", "realized"],
-  ["recognised", "recognized"],
-  ["apologised", "apologized"],
-  ["colour", "color"],
-  ["favourite", "favorite"],
-  ["neighbour", "neighbor"],
-  ["behaviour", "behavior"],
-  ["travelled", "traveled"],
-  ["cancelled", "canceled"],
-  ["centre", "center"],
-  ["theatre", "theater"],
-  ["grey", "gray"],
-  ["learnt", "learned"],
-  ["spelt", "spelled"],
-  ["dreamt", "dreamed"],
-  ["burnt", "burned"],
-
   // ── Sammandragning ↔ utskriven form ────────────────────────────────────────
   ["aren't", "are not"],
   ["isn't", "is not"],
@@ -56,23 +36,13 @@ const GROUPS: string[][] = [
   ["she's", "she is"],
 
   // ── Synonymer som båda är korrekta översättningar ──────────────────────────
+  // Bara brittisk engelska: amerikanska ord (pants, candy, mom …) godkänns inte.
   ["rabbit", "bunny"],
   ["grandmother", "grandma", "granny", "nan"],
   ["grandfather", "grandpa", "granddad", "grandad"],
-  ["mum", "mom", "mummy", "mommy"],
+  ["mum", "mummy"],
   ["dad", "daddy", "father"],
-  ["film", "movie"],
-  ["autumn", "fall"],
-  ["sweets", "candy"],
-  ["trousers", "pants"],
-  ["football", "soccer"],
-  ["rubber", "eraser"],
-  ["holiday", "vacation"],
-  ["jumper", "sweater"],
-  ["biscuit", "cookie"],
-  ["torch", "flashlight"],
-  ["lift", "elevator"],
-  ["bin", "trash can", "rubbish bin"],
+  ["bin", "rubbish bin"],
   ["sofa", "couch"],
   ["stomach", "belly", "tummy"],
   ["photo", "picture", "photograph"],

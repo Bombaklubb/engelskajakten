@@ -9,9 +9,9 @@
       "bonusPoints": 25,
       "helpText": [
         "👗 Advanced clothes vocabulary!",
-        "kofta = cardigan | hoodie = hoodie | sneakers = sneakers",
+        "kofta = cardigan | hoodie = hoodie | gympaskor = trainers",
         "leggings = leggings | mössa = beanie | overall = dungarees",
-        "Tips: Hoodie och sneakers används direkt på svenska!"
+        "Tips: Hoodie används direkt på svenska! Obs! Väst = waistcoat, medan vest betyder linne."
       ],
       "exercises": [
         {
@@ -76,8 +76,8 @@
             "bodice",
             "corset"
           ],
-          "correctIndex": 0,
-          "explanation": "Väst = vest. A vest has no sleeves."
+          "correctIndex": 1,
+          "explanation": "Väst = waistcoat. Obs! Vest betyder linne. He wears a waistcoat with his suit."
         }
       ]
     },
@@ -91,7 +91,7 @@
       "helpText": [
         "🍽️ Advanced food vocabulary!",
         "kök/matlagning = cuisine | ingrediens = ingredient | recept = recipe",
-        "dessert = dessert | dryck = beverage | aptitretare = appetizer",
+        "dessert = dessert | dryck = beverage | förrätt = starter",
         "Tips: Dessert och dessert stavas likadant på svenska och engelska!"
       ],
       "exercises": [
@@ -171,8 +171,8 @@
       "bonusPoints": 25,
       "helpText": [
         "🪑 Advanced furniture vocabulary!",
-        "fåtölj = armchair | byrå = dresser | skåp = cabinet",
-        "nattduksbord = nightstand | puff = ottoman | hylla = shelf",
+        "fåtölj = armchair | byrå = chest of drawers | skåp = cupboard",
+        "nattduksbord = bedside table | puff = ottoman | hylla = shelf",
         "Tips: Armchair = arm (arm) + chair (stol)!"
       ],
       "exercises": [
@@ -194,39 +194,39 @@
           "type": "multiple-choice",
           "question": "Vad heter 'byrå' (möbel) på engelska?",
           "options": [
-            "cabinet",
-            "dresser",
+            "cupboard",
+            "chest of drawers",
             "sideboard",
-            "credenza"
+            "wardrobe"
           ],
           "correctIndex": 1,
-          "explanation": "Byrå = dresser. Clothes go in the dresser."
+          "explanation": "Byrå = chest of drawers. Clothes go in the chest of drawers."
         },
         {
           "id": "hog-v5-3",
           "type": "multiple-choice",
           "question": "Vad heter 'skåp' på engelska?",
           "options": [
-            "cabinet",
+            "drawer",
             "cupboard",
             "locker",
             "vault"
           ],
-          "correctIndex": 0,
-          "explanation": "Skåp = cabinet. The cabinet has many shelves."
+          "correctIndex": 1,
+          "explanation": "Skåp = cupboard. The cupboard has many shelves."
         },
         {
           "id": "hog-v5-4",
           "type": "multiple-choice",
           "question": "Vad heter 'nattduksbord' på engelska?",
           "options": [
-            "nightstand",
+            "coffee table",
             "bedside table",
-            "end table",
+            "footstool",
             "side table"
           ],
-          "correctIndex": 0,
-          "explanation": "Nattduksbord = nightstand. The lamp is on the nightstand."
+          "correctIndex": 1,
+          "explanation": "Nattduksbord = bedside table. The lamp is on the bedside table."
         },
         {
           "id": "hog-v5-5",
@@ -1006,7 +1006,7 @@
         {
           "id": "hog-g2-8",
           "type": "multiple-choice",
-          "question": "'If I ___ you, I would apologize.' Choose the correct form.",
+          "question": "'If I ___ you, I would apologise.' Choose the correct form.",
           "options": [
             "am",
             "was",
@@ -1646,7 +1646,7 @@
         {
           "id": "hog-g-advanced-10",
           "type": "multiple-choice",
-          "question": "This is the ___ movie I have seen.",
+          "question": "This is the ___ film I have seen.",
           "options": [
             "good",
             "better",
@@ -2888,7 +2888,7 @@
         {
           "id": "hog-g11-6",
           "type": "fill-in-blank",
-          "sentence": "She needs ___ furniture for her new apartment.",
+          "sentence": "She needs ___ furniture for her new flat.",
           "answer": "some",
           "hint": "Räknebart eller icke-räknebart?",
           "explanation": "'Furniture' är icke-räknebart → 'some furniture', inte 'a furniture'."
@@ -3024,7 +3024,7 @@
         {
           "id": "hog-g12-7",
           "type": "multiple-choice",
-          "question": "Välj rätt: 'This movie is ___ interesting than the last one.'",
+          "question": "Välj rätt: 'This film is ___ interesting than the last one.'",
           "options": [
             "more",
             "most",
@@ -3773,9 +3773,12 @@
           "id": "hog-g18-3",
           "type": "fill-in-blank",
           "sentence": "There ___ neither time nor resources available.",
-          "answer": "is",
+          "answer": "are",
           "hint": "'Neither...nor': titta på närmaste substantiv – singular eller plural?",
-          "explanation": "Med 'neither...nor' styr närmaste substantiv. Resources = plural → are. Men 'neither time nor resources' → formellt is (time styr) accepteras också."
+          "explanation": "Med 'neither...nor' styr närmaste substantiv: resources = plural → are. 'Is' hörs också, men 'are' är det säkra valet.",
+          "alternativeAnswers": [
+            "is"
+          ]
         },
         {
           "id": "hog-g18-4",
@@ -3787,8 +3790,8 @@
             "am",
             "be"
           ],
-          "correctIndex": 1,
-          "explanation": "'Ruins' = plural → are. There are said to be ancient ruins..."
+          "correctIndex": 0,
+          "explanation": "'Ruins' = plural → are. There are said to be ancient ruins beneath the city."
         },
         {
           "id": "hog-g18-5",
@@ -5285,7 +5288,7 @@
         "Ingen dubblering om betoningen ligger tidigare: VIsit → visited, Open → opened.",
         "Konsonant + y → -ied: apply → applied. Vokal + y → bara -ed: enjoy → enjoyed.",
         "-ed uttalas på tre sätt: /ɪd/ efter t/d (wanted), /t/ efter tonlösa ljud (watched), /d/ efter tonande (played).",
-        "Brittisk engelska dubblar -l: travelled, cancelled. Amerikansk: traveled, canceled."
+        "Brittisk engelska dubblar -l: travelled, cancelled."
       ],
       "exercises": [
         {
@@ -5418,13 +5421,13 @@
           "type": "multiple-choice",
           "question": "Vilken är den brittiska stavningen av 'travel' i dåtid?",
           "options": [
-            "traveled",
+            "traveld",
             "travelled",
             "travelt",
             "travells"
           ],
           "correctIndex": 1,
-          "explanation": "Brittisk engelska dubblar l:et. Amerikansk engelska skriver 'traveled'."
+          "explanation": "Brittisk engelska dubblar l:et: travel → travelled."
         },
         {
           "id": "hog-g20-12",
@@ -5451,10 +5454,7 @@
           "type": "fill-in-blank",
           "sentence": "I ___ (realise) my mistake too late.",
           "answer": "realised",
-          "explanation": "realise → realised (brittisk stavning). Amerikansk: realized.",
-          "alternativeAnswers": [
-            "realized"
-          ]
+          "explanation": "realise → realised (brittisk stavning)."
         }
       ]
     },
@@ -6102,7 +6102,7 @@
         {
           "id": "hog-st-new2",
           "type": "fill-in-blank",
-          "sentence": "A: If I were you, I ___ apologize. B: Maybe you're right.",
+          "sentence": "A: If I were you, I ___ apologise. B: Maybe you're right.",
           "answer": "would",
           "hint": "Typ 2-konditionalis – hypotetisk situation.",
           "explanation": "Typ 2: 'If I were you, I would...' – hypotetisk situation i nutid."

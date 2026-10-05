@@ -10,7 +10,7 @@
       "helpText": [
         "👔 Advanced fashion vocabulary!",
         "kavaj = blazer | trenchcoat = trench coat | loafers = loafers",
-        "polotröja = turtleneck | denim = denim | tweed = tweed",
+        "polotröja = polo neck | denim = denim | tweed = tweed",
         "Tips: Blazer, loafers och trench coat används i engelskan dagligen!"
       ],
       "exercises": [
@@ -45,13 +45,13 @@
           "type": "multiple-choice",
           "question": "Vad heter 'polotröja' på engelska?",
           "options": [
-            "turtleneck",
+            "crew neck",
             "polo shirt",
             "cowl neck",
-            "mock neck"
+            "polo neck"
           ],
-          "correctIndex": 0,
-          "explanation": "Polotröja = turtleneck. A turtleneck covers the neck."
+          "correctIndex": 3,
+          "explanation": "Polotröja = polo neck. Obs! Polo shirt = pikétröja."
         },
         {
           "id": "gym-v1-4",
@@ -91,7 +91,7 @@
       "helpText": [
         "🍴 Advanced gastronomy vocabulary!",
         "gastronomisk = gourmet | näringslära = nutrition | delikatess = delicacy",
-        "aptitretare = appetizer | smakprov = tasting | marinera = marinate",
+        "förrätt = starter | smakprov = tasting | marinera = marinate",
         "Tips: Gourmet och nutrition används i engelskan direkt!"
       ],
       "exercises": [
@@ -137,15 +137,15 @@
         {
           "id": "gym-v2-4",
           "type": "multiple-choice",
-          "question": "Vad heter 'aptitretare' på engelska?",
+          "question": "Vad heter 'förrätt/aptitretare' på engelska?",
           "options": [
             "starter",
-            "appetizer",
-            "entree",
+            "main course",
+            "side dish",
             "amuse-bouche"
           ],
-          "correctIndex": 1,
-          "explanation": "Aptitretare = appetizer. An appetizer opens the meal."
+          "correctIndex": 0,
+          "explanation": "Förrätt = starter. A starter opens the meal."
         },
         {
           "id": "gym-v2-5",
@@ -171,7 +171,7 @@
       "bonusPoints": 30,
       "helpText": [
         "🏛️ Advanced interior design vocabulary!",
-        "tapetsering = upholstery | ljuskrona = chandelier | rumsavdelare = partition",
+        "möbelklädsel = upholstery | ljuskrona = chandelier | rumsavdelare = partition",
         "antikvitet = antique | inredning = decor | sockel = plinth",
         "Tips: Chandelier = ljuskrona, kom ihåg det!"
       ],
@@ -179,7 +179,7 @@
         {
           "id": "gym-v3-1",
           "type": "multiple-choice",
-          "question": "Vad heter 'tapetsering/stoppning' på engelska?",
+          "question": "Vad heter 'möbelklädsel/stoppning' på engelska?",
           "options": [
             "upholstery",
             "padding",
@@ -187,7 +187,7 @@
             "stuffing"
           ],
           "correctIndex": 0,
-          "explanation": "Tapetsering = upholstery. Upholstery covers sofas."
+          "explanation": "Möbelklädsel = upholstery. Upholstery covers sofas. (Tapetsering = wallpapering.)"
         },
         {
           "id": "gym-v3-2",
@@ -496,7 +496,7 @@
       "helpText": [
         "✈️ Advanced vehicle vocabulary!",
         "lokomotiv = locomotive | rymdfarkost = spacecraft | katamaran = catamaran",
-        "tankfartyg = tanker | enospårig tåg = monorail | luftskepp = airship",
+        "tankfartyg = tanker | enspårigt tåg = monorail | luftskepp = airship",
         "Tips: Locomotive, catamaran och monorail används direkt i engelskan!"
       ],
       "exercises": [
@@ -4068,7 +4068,7 @@
       "bonusPoints": 35,
       "helpText": [
         "Dubblering styrs av betoningen: ocCUR → occurred, perMIT → permitted, men BENefit → benefited.",
-        "Brittisk engelska föredrar -ise/-isation: analyse → analysed, organise → organised. Amerikansk: analyze, organize.",
+        "Brittisk engelska stavar med -ise/-isation: analyse → analysed, organise → organised.",
         "Vissa verb har både -ed och -t: learn → learned/learnt, spell → spelled/spelt, dream → dreamed/dreamt. -t är vanligare i brittisk engelska.",
         "I akademisk text är regelbundna verb i preteritum vanliga: the study examined, the data indicated, the results suggested."
       ],
@@ -4084,7 +4084,7 @@
             "learnted"
           ],
           "correctIndex": 1,
-          "explanation": "Brittisk engelska använder ofta 'learnt'; 'learned' är också korrekt och vanligare i amerikansk engelska."
+          "explanation": "Brittisk engelska: learn → learnt."
         },
         {
           "id": "gym-g11-2",
@@ -4111,10 +4111,7 @@
           "type": "fill-in-blank",
           "sentence": "The paper ___ (analyse) three separate data sets.",
           "answer": "analysed",
-          "explanation": "Brittisk stavning: analyse → analysed. Amerikansk: analyzed.",
-          "alternativeAnswers": [
-            "analyzed"
-          ]
+          "explanation": "Brittisk stavning: analyse → analysed."
         },
         {
           "id": "gym-g11-5",
@@ -4163,13 +4160,13 @@
           "type": "multiple-choice",
           "question": "Vilken är den brittiska stavningen?",
           "options": [
-            "organized",
+            "organiced",
             "organised",
-            "organizd",
+            "organisd",
             "organis"
           ],
           "correctIndex": 1,
-          "explanation": "Brittisk engelska föredrar -ise: organised. Amerikansk: organized."
+          "explanation": "Brittisk engelska stavar med -ise: organised."
         },
         {
           "id": "gym-g11-9",
@@ -4189,7 +4186,7 @@
             "spelted"
           ],
           "correctIndex": 1,
-          "explanation": "Brittisk engelska: spelt. Amerikansk: spelled. Båda är korrekta."
+          "explanation": "Brittisk engelska: spell → spelt."
         },
         {
           "id": "gym-g11-11",
@@ -4637,7 +4634,7 @@
         {
           "id": "gym-st-4",
           "type": "multiple-choice",
-          "question": "Konjunktiv: 'If I ___ you, I would apologize immediately.'",
+          "question": "Konjunktiv: 'If I ___ you, I would apologise immediately.'",
           "options": [
             "am",
             "was",
@@ -4676,7 +4673,7 @@
         {
           "id": "gym-st-7",
           "type": "multiple-choice",
-          "question": "Inversion: 'Only then ___ she realize her mistake.'",
+          "question": "Inversion: 'Only then ___ she realise her mistake.'",
           "options": [
             "did",
             "was",
@@ -4684,7 +4681,7 @@
             "could"
           ],
           "correctIndex": 0,
-          "explanation": "Negativ inversion med 'Only then': Only then + hjälpverb + subjekt. Only then did she realize."
+          "explanation": "Negativ inversion med 'Only then': Only then + hjälpverb + subjekt. Only then did she realise."
         },
         {
           "id": "gym-st-8",
@@ -4952,9 +4949,9 @@
         {
           "id": "gym-st-27",
           "type": "fill-in-blank",
-          "sentence": "Only when she left ___ he realize how much she meant to him.",
+          "sentence": "Only when she left ___ he realise how much she meant to him.",
           "answer": "did",
-          "explanation": "Inversion med 'only when': Only when + sats + hjälpverb + subjekt. Only when she left did he realize."
+          "explanation": "Inversion med 'only when': Only when + sats + hjälpverb + subjekt. Only when she left did he realise."
         },
         {
           "id": "gym-st-28",
@@ -5020,7 +5017,7 @@
         {
           "id": "gym-sluttest-2--gym-v3-1",
           "type": "multiple-choice",
-          "question": "Vad heter 'tapetsering/stoppning' på engelska?",
+          "question": "Vad heter 'möbelklädsel/stoppning' på engelska?",
           "options": [
             "upholstery",
             "padding",
@@ -5028,7 +5025,7 @@
             "stuffing"
           ],
           "correctIndex": 0,
-          "explanation": "Tapetsering = upholstery. Upholstery covers sofas."
+          "explanation": "Möbelklädsel = upholstery. Upholstery covers sofas. (Tapetsering = wallpapering.)"
         },
         {
           "id": "gym-sluttest-2--gym-v4-1",
@@ -6392,12 +6389,12 @@
           "question": "Vilket ord är mest formellt/akademiskt för 'use'?",
           "options": [
             "apply",
-            "utilize",
+            "utilise",
             "employ",
             "Alla är likvärdigt formella"
           ],
           "correctIndex": 3,
-          "explanation": "'Apply', 'utilize' och 'employ' är alla mer formella alternativ till 'use'."
+          "explanation": "'Apply', 'utilise' och 'employ' är alla mer formella alternativ till 'use'."
         },
         {
           "id": "gym-spel-2-q2",

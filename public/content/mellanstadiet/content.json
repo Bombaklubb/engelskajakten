@@ -9,7 +9,7 @@
       "bonusPoints": 20,
       "helpText": [
         "🧥 Intermediate clothes vocabulary!",
-        "jacka = jacket | halsduk = scarf | vantar = gloves",
+        "jacka = jacket | halsduk = scarf | vantar = mittens | handskar = gloves",
         "stövlar = boots | uniform = uniform | kostym = suit",
         "Tips: Uniform stavas likadant på svenska och engelska!"
       ],
@@ -50,8 +50,8 @@
             "mittens",
             "earmuffs"
           ],
-          "correctIndex": 1,
-          "explanation": "Vantar = gloves (or mittens). Gloves keep hands warm."
+          "correctIndex": 2,
+          "explanation": "Vantar = mittens. Handskar = gloves. Mittens keep your hands warm."
         },
         {
           "id": "mel-v5-4",
@@ -194,9 +194,9 @@
           "type": "multiple-choice",
           "question": "Vad heter 'garderob' på engelska?",
           "options": [
-            "dresser",
+            "mirror",
             "wardrobe",
-            "closet",
+            "shelf",
             "chest"
           ],
           "correctIndex": 1,
@@ -495,7 +495,7 @@
       "bonusPoints": 20,
       "helpText": [
         "🚂 More vehicle vocabulary!",
-        "lastbil = truck | motorcykel = motorcycle | helikopter = helicopter",
+        "lastbil = lorry | motorcykel = motorcycle | helikopter = helicopter",
         "ubåt = submarine | spårvagn = tram | ambulans = ambulance",
         "Tips: Helicopter och helikopter är nästan samma ord!"
       ],
@@ -505,13 +505,13 @@
           "type": "multiple-choice",
           "question": "Vad heter 'lastbil' på engelska?",
           "options": [
-            "truck",
+            "tractor",
             "van",
             "lorry",
             "wagon"
           ],
-          "correctIndex": 0,
-          "explanation": "Lastbil = truck. The truck carries heavy loads."
+          "correctIndex": 2,
+          "explanation": "Lastbil = lorry. The lorry carries heavy loads."
         },
         {
           "id": "mel-v11-2",
@@ -532,7 +532,7 @@
           "question": "Vad heter 'helikopter' på engelska?",
           "options": [
             "helicopter",
-            "airplane",
+            "aeroplane",
             "drone",
             "airship"
           ],
@@ -1162,7 +1162,7 @@
         {
           "id": "mel-g6-2",
           "type": "multiple-choice",
-          "question": "Välj rätt: 'My sister ___ not like horror movies.'",
+          "question": "Välj rätt: 'My sister ___ not like horror films.'",
           "options": [
             "do",
             "am",
@@ -2951,7 +2951,7 @@
         {
           "id": "mel-g-tenses-16",
           "type": "fill-in-blank",
-          "sentence": "They ___ (see) a movie yesterday.",
+          "sentence": "They ___ (see) a film yesterday.",
           "answer": "saw",
           "hint": "Tidmarkörer som 'yesterday', 'last year', 'ago' → datid (past simple)."
         },
@@ -3146,7 +3146,7 @@
         {
           "id": "mel-g-tenses2-15",
           "type": "fill-in-blank",
-          "sentence": "We ___ (see) a movie yesterday.",
+          "sentence": "We ___ (see) a film yesterday.",
           "answer": "saw",
           "hint": "Tidmarkörer som 'yesterday', 'last year', 'ago' → datid (past simple)."
         },
@@ -3353,7 +3353,7 @@
         {
           "id": "mel-g-tenses3-15",
           "type": "fill-in-blank",
-          "sentence": "We ___ (see) that movie.",
+          "sentence": "We ___ (see) that film.",
           "answer": "have seen",
           "hint": "Perfekt: have/has + perfektparticip. I/you/we/they → have. He/she/it → has."
         },
@@ -3848,7 +3848,7 @@
         {
           "id": "mel-g-tenses5-19",
           "type": "multiple-choice",
-          "question": "He ___ already seen that movie.",
+          "question": "He ___ already seen that film.",
           "options": [
             "has",
             "have",
@@ -4098,8 +4098,8 @@
       "helpText": [
         "🥦 Grönsaker på engelska – hälsosamt och lärorikt!",
         "morot = carrot | potatis = potato | tomat = tomato",
-        "gurka = cucumber | lök = onion | paprika = bell pepper",
-        "sallad = lettuce | broccoli = broccoli | majs = corn",
+        "gurka = cucumber | lök = onion | paprika = pepper",
+        "sallad = lettuce | broccoli = broccoli | majs = sweetcorn",
         "ärta = pea | blomkål = cauliflower | spenat = spinach"
       ],
       "exercises": [
@@ -4174,7 +4174,7 @@
             "pumpkin"
           ],
           "correctIndex": 0,
-          "explanation": "Paprika = bell pepper (eller pepper). Peppers can be red, yellow or green!"
+          "explanation": "Paprika = pepper. Peppers can be red, yellow or green!"
         },
         {
           "id": "mel-v1-7",
@@ -4205,10 +4205,10 @@
             "carrot",
             "cabbage",
             "celery",
-            "corn"
+            "sweetcorn"
           ],
           "correctIndex": 3,
-          "explanation": "Majs = corn. Corn grows tall in the summer!"
+          "explanation": "Majs = sweetcorn. Sweetcorn is yellow and sweet!"
         },
         {
           "id": "mel-v1-10",
@@ -5607,7 +5607,7 @@
         {
           "id": "mel-sa-1",
           "type": "multiple-choice",
-          "question": "She bought ___ new books at the store.",
+          "question": "She bought ___ new books at the shop.",
           "options": [
             "any",
             "some",
@@ -5963,10 +5963,7 @@
           "type": "fill-in-blank",
           "sentence": "We ___ (travel) to Spain last summer.",
           "answer": "travelled",
-          "explanation": "Brittisk engelska dubblar l:et: travel → travelled. (Amerikansk: traveled)",
-          "alternativeAnswers": [
-            "traveled"
-          ]
+          "explanation": "Brittisk engelska dubblar l:et: travel → travelled."
         }
       ]
     },
@@ -6817,13 +6814,13 @@
           "type": "multiple-choice",
           "question": "Vad heter 'lastbil' på engelska?",
           "options": [
-            "truck",
+            "tractor",
             "van",
             "lorry",
             "wagon"
           ],
-          "correctIndex": 0,
-          "explanation": "Lastbil = truck. The truck carries heavy loads."
+          "correctIndex": 2,
+          "explanation": "Lastbil = lorry. The lorry carries heavy loads."
         },
         {
           "id": "mel-st2-new1",

@@ -54,15 +54,18 @@ export default function ResultModal({
     return () => document.removeEventListener("keydown", onKey);
   }, [onContinue]);
 
+  // Rutan kan bli högre än skärmen (t.ex. på en Chromebook med turbonus och
+  // repetitionsruta). Därför kan bakgrunden scrollas, och my-auto centrerar
+  // rutan bara när den får plats – annars hamnade knapparna under kanten.
   return (
-    <div className="fixed inset-0 bg-indigo-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+    <div className="fixed inset-0 bg-indigo-900/40 backdrop-blur-sm flex justify-center overflow-y-auto z-50 p-4 animate-fade-in">
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={`Resultat: ${totalCorrect} av ${totalQuestions} rätt`}
         tabIndex={-1}
-        className="relative bg-white dark:bg-gray-800 rounded-4xl p-8 max-w-md w-full text-center animate-slide-up border-4 border-indigo-100 dark:border-gray-700 focus:outline-none"
+        className="relative my-auto bg-white dark:bg-gray-800 rounded-4xl p-6 sm:p-8 max-w-md w-full text-center animate-slide-up border-4 border-indigo-100 dark:border-gray-700 focus:outline-none"
         style={{
           boxShadow: "0 10px 0 0 rgba(99, 102, 241, 0.15), 0 20px 40px -8px rgba(99, 102, 241, 0.25), inset 0 4px 8px 0 rgba(255, 255, 255, 0.8)"
         }}

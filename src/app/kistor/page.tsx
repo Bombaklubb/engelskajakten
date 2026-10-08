@@ -308,9 +308,9 @@ interface RewardResult { description: string; points: number }
 
 function RewardPopup({ result, onClose }: { result: RewardResult; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center overflow-y-auto z-50 p-4">
       <div
-        className="rounded-3xl p-7 max-w-sm w-full text-center animate-slide-up"
+        className="my-auto rounded-3xl p-7 max-w-sm w-full text-center animate-slide-up"
         style={{
           background: "rgba(255,255,255,0.97)",
           border: "3px solid #f59e0b",

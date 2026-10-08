@@ -76,9 +76,9 @@ function ConfirmBuy({
 }) {
   const after = balance - price;
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[70] p-4"
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center overflow-y-auto z-[70] p-4"
       role="dialog" aria-modal="true" aria-label={`Köp ${name}`}>
-      <div className="card max-w-xs w-full text-center bg-white dark:bg-gray-800">
+      <div className="card my-auto max-w-xs w-full text-center bg-white dark:bg-gray-800">
         <div className="flex justify-center mb-3">{preview}</div>
         <h2 className="text-xl font-black text-gray-800 dark:text-gray-100 mb-1">Köp {name}?</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">

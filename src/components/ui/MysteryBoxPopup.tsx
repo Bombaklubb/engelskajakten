@@ -37,14 +37,14 @@ export default function MysteryBoxPopup({ reward, onClose }: MysteryBoxPopupProp
   const REWARD_ICONS: Record<string, string> = { points: "⭐", badge: "🎖️" };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[60] p-4 animate-fade-in">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center overflow-y-auto z-[60] p-4 animate-fade-in">
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label="Du hittade en mystisk låda"
         tabIndex={-1}
-        className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center focus:outline-none"
+        className="my-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 max-w-sm w-full text-center focus:outline-none"
         style={{
           border: "3px solid #a855f7",
           boxShadow: "0 8px 32px rgba(168,85,247,0.3), 0 2px 8px rgba(0,0,0,0.2)",

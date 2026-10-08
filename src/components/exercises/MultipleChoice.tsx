@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { MultipleChoiceExercise } from "@/lib/types";
+import { shuffleChoices } from "@/lib/shuffleChoices";
 
 interface Props {
   exercise: MultipleChoiceExercise;
@@ -9,7 +10,11 @@ interface Props {
   isLast?: boolean;
 }
 
-export default function MultipleChoice({ exercise, onAnswer, isLast }: Props) {
+export default function MultipleChoice({ exercise: original, onAnswer, isLast }: Props) {
+  // Alternativen blandas en gång per fråga (knutet till id:t, så att ordningen
+  // inte hoppar om föräldern ritar om). Facit följer med, se shuffleChoices.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const exercise = useMemo(() => shuffleChoices(original), [original.id]);
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [showHint, setShowHint] = useState(false);

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { CoinGameQuestion } from "@/lib/types";
+import { shuffleChoices } from "@/lib/shuffleChoices";
 
 interface Props {
   questions: CoinGameQuestion[];
@@ -25,7 +26,14 @@ export default function CoinGame({ questions, onComplete }: Props) {
   const [runnerX, setRunnerX] = useState(0);
   const [shake, setShake] = useState(false);
 
-  const currentQuestion = questions[currentIndex];
+  // Alternativen blandas en gång per fråga, så att rätt svar inte alltid ligger
+  // på samma plats. Facit följer med, se shuffleChoices.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const rawQuestion = questions[currentIndex];
+  const currentQuestion = useMemo(
+    () => (rawQuestion ? shuffleChoices(rawQuestion) : rawQuestion),
+    [currentIndex, rawQuestion?.id]
+  );
 
   // Update runner position based on coins collected
   useEffect(() => {

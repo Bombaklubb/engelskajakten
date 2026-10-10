@@ -52,20 +52,12 @@ export default function RootLayout({
         <ThemedBackdrop />
         <AnalyticsInit />
         {children}
-        {/* Upphovsrätt längst ned på varje sida. pb-14 håller raden ovanför de
-            fasta hörnknapparna nedan. */}
-        <footer className="relative z-10 px-4 pt-2 pb-14 text-center">
-          <p className="inline-block max-w-2xl rounded-lg bg-white/80 px-3 py-1.5 text-[11px] leading-snug text-slate-600 backdrop-blur-sm dark:bg-gray-900/70 dark:text-slate-300">
-            © 2025–2026 Martin Akdogan. Engelskajakten är fri att använda i undervisningen. Kopiering av
-            appen, innehållet eller namnet är inte tillåten utan tillstånd.
-          </p>
-        </footer>
         {/* Hörnen längst ned. Ljusa knappar i stället för vit text direkt på
             sidan: den vita texten försvann på ljusa sidor som Om och Affären,
             och på ljusa teman. */}
         <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between px-3 pb-2 select-none pointer-events-none">
           <a
-            href="mailto:martin.akdogan@enkoping.se"
+            href="mailto:martinsikt@gmail.com"
             className="pointer-events-auto inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 bg-white/85 backdrop-blur-sm shadow-md border border-black/5 hover:text-slate-900 hover:bg-white transition-colors dark:bg-gray-900/80 dark:text-slate-200 dark:border-white/10 dark:hover:text-white"
           >
             <span aria-hidden="true">✉️</span>

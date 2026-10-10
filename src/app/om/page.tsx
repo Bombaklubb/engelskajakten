@@ -374,14 +374,14 @@ export default function OmPage() {
             Engelskajakten skyddas av upphovsrätt.
           </p>
           <p>
-            Elever, lärare och skolor får gärna använda appen fritt i undervisningen. Det är däremot inte
+            Alla får gärna använda appen fritt, både i skolan och hemma: elever, föräldrar, lärare och skolor. Det är däremot inte
             tillåtet att kopiera, sälja eller publicera appen, dess innehåll eller delar av koden, eller att
             använda namnet för en egen tjänst, utan skriftligt tillstånd.
           </p>
           <p>
             Frågor eller önskemål om samarbete:{" "}
-            <a href="mailto:martin.akdogan@enkoping.se" className="font-bold text-en-600 dark:text-en-300 underline">
-              martin.akdogan@enkoping.se
+            <a href="mailto:martinsikt@gmail.com" className="font-bold text-en-600 dark:text-en-300 underline">
+              martinsikt@gmail.com
             </a>
           </p>
         </Section>

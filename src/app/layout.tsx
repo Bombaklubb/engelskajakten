@@ -52,6 +52,14 @@ export default function RootLayout({
         <ThemedBackdrop />
         <AnalyticsInit />
         {children}
+        {/* Upphovsrätt längst ned på varje sida. pb-14 håller raden ovanför de
+            fasta hörnknapparna nedan. */}
+        <footer className="relative z-10 px-4 pt-2 pb-14 text-center">
+          <p className="inline-block max-w-2xl rounded-lg bg-white/80 px-3 py-1.5 text-[11px] leading-snug text-slate-600 backdrop-blur-sm dark:bg-gray-900/70 dark:text-slate-300">
+            © 2025–2026 Martin Akdogan. Engelskajakten är fri att använda i undervisningen. Kopiering av
+            appen, innehållet eller namnet är inte tillåten utan tillstånd.
+          </p>
+        </footer>
         {/* Hörnen längst ned. Ljusa knappar i stället för vit text direkt på
             sidan: den vita texten försvann på ljusa sidor som Om och Affären,
             och på ljusa teman. */}

@@ -49,6 +49,7 @@ const AKTIVITETER = [
   { emoji: "🔍", name: "Ordsökning", desc: "Hitta gömda engelska ord i rutnätet. Lugnare träning på ordbilder." },
   { emoji: "🎮", name: "Spel", desc: "Memory, Hänga gubben, Tidsattack och Samla mynt. Alla ger riktiga poäng." },
   { emoji: "🔁", name: "Försök igen", desc: "Allt du svarat fel på samlas här. Rätta ett gammalt fel och det försvinner ur listan." },
+  { emoji: "🖨️", name: "Skriva ut", desc: "Välj kapitel eller enstaka frågor och skriv ut dem som ett arbetsblad, med eller utan facit." },
 ];
 
 const SPEL = [
@@ -176,7 +177,7 @@ export default function OmPage() {
         </Section>
 
         <Section emoji="📚" title="Vad du kan träna på">
-          <p>Varje värld har sex flikar:</p>
+          <p>Varje värld har sju flikar:</p>
           <ul className="space-y-2.5">
             {AKTIVITETER.map((a) => (
               <li key={a.name} className="flex gap-3 items-start">
@@ -204,6 +205,33 @@ export default function OmPage() {
             Svarar du fel hamnar frågan under <strong>Försök igen</strong>, så att du kan ta den en gång
             till senare.
           </p>
+        </Section>
+
+        <Section emoji="🖨️" title="Skriva ut">
+          <p>
+            Under fliken <strong>🖨️ Skriva ut</strong> i varje värld kan du göra ett arbetsblad på papper av
+            övningarna – till exempel för en lektion, en läxa eller för den som hellre skriver för hand.
+          </p>
+          <ul className="space-y-1.5 list-disc pl-5 marker:text-gray-400">
+            <li>
+              Bocka i hela kapitel, eller tryck på <strong>▼</strong> och välj enstaka frågor. Grammatik,
+              stavning, frågor från Samla mynt och ordsök kan blandas på samma blad.
+            </li>
+            <li>
+              Kryssa i <strong>Med facit</strong> om du vill ha svaren. Facit hamnar på en egen sida sist, så
+              den är lätt att ta bort innan bladet delas ut.
+            </li>
+            <li>
+              Tryck på <strong>Skriv ut</strong>. I utskriftsrutan kan du också välja{" "}
+              <strong>Spara som PDF</strong>, till exempel för att dela bladet i Classroom.
+            </li>
+          </ul>
+          <p>
+            Bladet blir svart på vitt i A4, med rader för namn och datum, numrerade frågor, ringar att fylla
+            i vid flervalsfrågor och skrivlinjer i luckorna. Ordsök skrivs ut som ett rutnät med en lista
+            över orden att hitta. Svarsalternativen blandas, så bladet ser lite olika ut varje gång.
+          </p>
+          <p>Det du skriver ut ger inga poäng i appen.</p>
         </Section>
 
         <Section emoji="🎮" title="Spelen">

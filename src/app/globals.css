@@ -287,3 +287,65 @@
 ::-webkit-scrollbar-track { @apply bg-transparent; }
 ::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+
+/* ─── Skriva ut: det utskrivna arbetsbladet ──────────────────────────── */
+/* Bladet ritas i <body> av PrintSheet och är dolt på skärmen. Vid utskrift
+   döljs allt annat i <body>, och bladet blir svart på vitt oavsett tema och
+   mörkt läge. Samma stil som i Svenskajakten. */
+.print-sheet { display: none; }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 14mm 16mm;
+    @bottom-center { content: "Sida " counter(page) " av " counter(pages); font-size: 9pt; color: #555; }
+  }
+  html, body { background: #fff !important; }
+  body > *:not(.print-sheet) { display: none !important; }
+  .print-sheet {
+    display: block;
+    color: #111;
+    background: #fff;
+    font-family: "Baloo 2", system-ui, sans-serif;
+    font-size: 11pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-sheet * { color: #111 !important; text-shadow: none !important; }
+
+  .ps-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12pt; border-bottom: 1.5pt solid #111; padding-bottom: 6pt; margin-bottom: 12pt; }
+  .ps-brand { font-size: 14pt; font-weight: 800; margin: 0; }
+  .ps-sub { font-size: 8.5pt; margin: 0; color: #555 !important; }
+  .ps-name { display: flex; gap: 14pt; font-size: 10pt; white-space: nowrap; }
+
+  .ps-chapter { margin-bottom: 12pt; }
+  .ps-title { font-size: 12.5pt; font-weight: 800; margin: 10pt 0 6pt; padding: 3pt 6pt; border-left: 4pt solid #111; background: #f2f2f2; break-after: avoid; }
+  .ps-instr { font-style: italic; font-size: 10pt; margin: 0 0 6pt; list-style: none; }
+
+  .ps-list { padding-left: 26pt; margin: 0; list-style: decimal; }
+  .ps-list > li::marker { font-weight: 800; }
+  .ps-item { break-inside: avoid; margin-bottom: 9pt; }
+  .ps-item p { margin: 0 0 3pt; }
+  .ps-options { list-style: none; padding: 0; margin: 2pt 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2pt 14pt; }
+  .ps-circle, .ps-box { display: inline-block; width: 9pt; height: 9pt; border: 1pt solid #111; vertical-align: -1pt; margin-right: 3pt; }
+  .ps-circle { border-radius: 50%; }
+  .ps-gap { display: inline-block; min-width: 70pt; border-bottom: 1pt solid #111; margin: 0 3pt; }
+  .ps-line { display: block; border-bottom: 1pt solid #111; height: 18pt; margin-top: 2pt; }
+  .ps-line-short { width: 45%; }
+  .ps-chips { display: flex; flex-wrap: wrap; gap: 4pt; }
+  .ps-chip { border: 1pt solid #111; border-radius: 4pt; padding: 1pt 6pt; }
+  .ps-image { font-size: 14pt; }
+  .ps-clues { margin: 0 0 2pt; padding-left: 14pt; list-style: disc; }
+
+  .ps-grid { border-collapse: collapse; margin: 4pt 0 6pt; break-inside: avoid; }
+  .ps-grid td { width: 18pt; height: 18pt; text-align: center; font-size: 11pt; font-weight: 700; border: 0.5pt solid #999; font-family: ui-monospace, monospace; }
+  .ps-grid-key td { color: #bbb !important; font-weight: 400; }
+  .ps-grid-key td.ps-hit { color: #111 !important; font-weight: 800; background: #ddd; }
+  .ps-words { list-style: none; padding: 0; margin: 0; columns: 3; font-size: 10pt; }
+
+  .ps-key { break-before: page; }
+  .ps-key-chapter { break-inside: avoid; margin-bottom: 8pt; }
+  .ps-key-chapter h3 { font-size: 10.5pt; font-weight: 800; margin: 6pt 0 2pt; }
+  .ps-key-list { columns: 2; font-size: 10pt; padding-left: 26pt; margin: 0; list-style: decimal; }
+}

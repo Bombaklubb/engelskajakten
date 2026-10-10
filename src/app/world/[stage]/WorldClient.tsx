@@ -20,6 +20,7 @@ import { BorderBeam } from "@/components/magicui/border-beam";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import ForsokaIgen from "@/components/ui/ForsokaIgen";
+import PrintTab from "@/components/print/PrintTab";
 import { getErrorCount } from "@/lib/errorBank";
 import { contentUrl } from "@/lib/contentUrl";
 
@@ -40,7 +41,7 @@ interface Props {
   params: Promise<{ stage: string }>;
 }
 
-type Tab = "grammar" | "spelling" | "wordsearch" | "regler" | "spel" | "forsokaigen";
+type Tab = "grammar" | "spelling" | "wordsearch" | "regler" | "spel" | "forsokaigen" | "skriv-ut";
 
 export default function WorldPage({ params }: Props) {
   const { stage: stageId } = use(params);
@@ -60,7 +61,7 @@ export default function WorldPage({ params }: Props) {
     // efter # och inte efter ?: med ?tab= hämtade routern världssidan från
     // servern på nytt varje gång eleven kom tillbaka från ett kapitel, men
     // #tab= återanvänder sidan den redan har. Gamla ?tab=-länkar fungerar ändå.
-    const VALID: Tab[] = ["grammar", "spelling", "wordsearch", "regler", "spel", "forsokaigen"];
+    const VALID: Tab[] = ["grammar", "spelling", "wordsearch", "regler", "spel", "forsokaigen", "skriv-ut"];
     const wanted = (new URLSearchParams(window.location.hash.slice(1)).get("tab") ??
       new URLSearchParams(window.location.search).get("tab")) as Tab | null;
     if (wanted && VALID.includes(wanted)) setActiveTab(wanted);
@@ -112,6 +113,7 @@ export default function WorldPage({ params }: Props) {
 
   // SVG icons for tabs
   const tabIcons: Record<Tab, React.ReactNode> = {
+    "skriv-ut": <span className="text-sm leading-none" aria-hidden="true">🖨️</span>,
     grammar: (
       <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -153,6 +155,7 @@ export default function WorldPage({ params }: Props) {
     { id: "wordsearch",   label: "Ordsökning" },
     { id: "spel",         label: "Spel" },
     { id: "forsokaigen",  label: "Försök igen" },
+    { id: "skriv-ut",     label: "Skriva ut" },
   ];
 
   return (
@@ -288,7 +291,7 @@ export default function WorldPage({ params }: Props) {
         )}
 
         {/* Module grid (grammar / reading / spelling / wordsearch) */}
-        {activeTab !== "regler" && activeTab !== "spel" && activeTab !== "forsokaigen" && (
+        {activeTab !== "regler" && activeTab !== "spel" && activeTab !== "forsokaigen" && activeTab !== "skriv-ut" && (
           !content ? (
             <div className="card text-center py-12 text-gray-400">
               <div className="text-4xl mb-3">📭</div>
@@ -340,6 +343,15 @@ export default function WorldPage({ params }: Props) {
                 </div>
               )}
             </div>
+          )
+        )}
+
+        {/* Skriva ut: välj kapitel eller frågor och skriv ut ett arbetsblad */}
+        {activeTab === "skriv-ut" && (
+          content ? (
+            <PrintTab stage={stage} content={content} />
+          ) : (
+            <div className="card text-center py-12 text-gray-400">Kunde inte ladda innehåll.</div>
           )
         )}
 

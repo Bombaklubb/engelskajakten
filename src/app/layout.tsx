@@ -22,8 +22,14 @@ export const metadata: Metadata = {
   icons: {
     // Favikonen ligger direkt i sidan (data-URI) i stället för som en fil, så
     // den kostar inget eget anrop. Samma bild som public/union-jack.svg.
-    icon: FAVICON_DATA_URI,
-    apple: "/union-jack.svg",
+    // PNG-varianten används där SVG inte fungerar. Safari, iPad och
+    // hemskärmen kräver en PNG som apple-touch-icon – med SVG visade Safari
+    // bara ett rött "E" i favoriterna.
+    icon: [
+      { url: FAVICON_DATA_URI, type: "image/svg+xml" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
   openGraph: {
     images: [

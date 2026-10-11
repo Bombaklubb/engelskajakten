@@ -13,6 +13,7 @@ import { getLevel } from "@/lib/levels";
 import { getEquippedFrame, getEquippedTheme, getEquippedEffect, getWalletBalance } from "@/lib/shopStorage";
 import { useThemeArt } from "@/lib/useThemeArt";
 import EffectOverlay from "@/components/ui/EffectOverlay";
+import TransferCard from "@/components/ui/TransferCard";
 import type { StudentData, StageId } from "@/lib/types";
 
 export default function ProfilePage() {
@@ -81,7 +82,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header student={student} />
 
-      <main className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      <main className="max-w-3xl mx-auto px-4 pt-8 pb-24 space-y-6">
         {/* Profile hero */}
         {(() => {
           return (
@@ -306,6 +307,8 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
+
+        <TransferCard />
 
       </main>
     </div>

@@ -366,53 +366,6 @@ export function clearGamification(): void {
   localStorage.removeItem(gamKey(activeName));
 }
 
-// ─── Export / Import progress ─────────────────────────────────────────────────
-
-export function exportProgress(data: StudentData): void {
-  const json = JSON.stringify(data, null, 2);
-  const blob = new Blob([json], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `engelskajakten_${data.name.replace(/\s+/g, "_")}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-export function importProgress(file: File): Promise<StudentData> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string) as StudentData;
-        if (!data.name || !data.stages) throw new Error("Ogiltig fil");
-        saveStudent(data);
-        resolve(data);
-      } catch {
-        reject(new Error("Kunde inte läsa filen. Kontrollera att det är rätt fil."));
-      }
-    };
-    reader.onerror = () => reject(new Error("Filläsning misslyckades."));
-    reader.readAsText(file);
-  });
-}
-
-// ─── Share code (base64 of JSON) ─────────────────────────────────────────────
-
-export function generateShareCode(data: StudentData): string {
-  return btoa(encodeURIComponent(JSON.stringify(data)));
-}
-
-export function importShareCode(code: string): StudentData | null {
-  try {
-    const data = JSON.parse(decodeURIComponent(atob(code))) as StudentData;
-    if (!data.name || !data.stages) return null;
-    return data;
-  } catch {
-    return null;
-  }
-}
-
 // ─── Daily streak ─────────────────────────────────────────────────────────────
 
 interface StreakData { days: number; lastDate: string; }

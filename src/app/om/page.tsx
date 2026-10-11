@@ -341,7 +341,7 @@ export default function OmPage() {
             Klicka på ditt namn uppe till höger för att se din statistik: nivå, poäng per värld, avklarade
             kapitel och tid i appen. Där finns också de <strong>elva märkena</strong> – för de första
             stegen, för grammatik, stavning, spel, för att vara flitig, och några som är svårare att lista
-            ut.
+            ut. Längst ned på profilen kan du <strong>spara och flytta dina framsteg</strong> till en annan enhet.
           </p>
         </Section>
 
@@ -380,8 +380,18 @@ export default function OmPage() {
           <ul className="space-y-1.5 list-disc pl-5 marker:text-gray-400">
             <li>
               <strong>Allt sparas på den enhet du använder</strong> – poäng, märken, kistor och köp.
-              Ingenting ligger på en server. Byter du dator eller webbläsare börjar du om från noll, och
-              rensar du webbläsarens data försvinner allt.
+              Ingenting ligger på en server.
+            </li>
+            <li>
+              <strong>Byter du dator, iPad eller webbläsare?</strong> Gå till din profil och välj{" "}
+              <strong>Skapa flytt-länk</strong> under <strong>Spara och flytta dina framsteg</strong>. Skanna
+              QR-koden med den nya enheten, eller kopiera länken och mejla den till dig själv. Länken innehåller
+              allt du har klarat och skickas aldrig till någon server.
+            </li>
+            <li>
+              Spara mejlet med länken, så har du en säkerhetskopia om datorn rensas. Öppna länken, eller välj{" "}
+              <strong>Byter du enhet?</strong> på inloggningssidan och klistra in den där. Där kan du också läsa
+              in en sparad fil.
             </li>
             <li>
               Flera elever kan dela samma enhet. Var och en skriver sitt eget namn och har egna poäng,

@@ -258,13 +258,20 @@ export default function HomePage() {
                   Ligger inne i det vita kortet: utanför hamnade den bakom den
                   fasta kontaktlisten på iPad och helt utanför fönstret på en
                   skärm som är 768 px hög. */}
-              <div className="text-center mt-4 pt-4 border-t border-en-100">
+              <div className="text-center mt-4 pt-4 border-t border-en-100 flex flex-col items-center">
                 <Link prefetch={false}
                   href="/om"
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-en-600 hover:text-en-700 hover:underline underline-offset-4 transition-colors"
                 >
                   <span aria-hidden="true">❓</span>
                   Om Engelskajakten – så fungerar appen
+                </Link>
+                <Link prefetch={false}
+                  href="/flytta"
+                  className="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-en-600 hover:text-en-700 hover:underline underline-offset-4 transition-colors"
+                >
+                  <span aria-hidden="true">📲</span>
+                  Byter du enhet? Läs in dina framsteg här
                 </Link>
               </div>
             </div>

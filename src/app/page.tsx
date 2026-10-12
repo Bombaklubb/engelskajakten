@@ -15,6 +15,11 @@ import { NumberTicker } from "@/components/magicui/number-ticker";
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
 import UnionJack from "@/components/ui/UnionJack";
 
+// Inloggningen visar bara de åtta första figurerna, så att hela sidan ryms utan
+// scroll. Fler figurer finns i Affären, och elever som redan valt en annan
+// figur behåller den.
+const LOGIN_AVATARS = AVATARS.slice(0, 8);
+
 // Alla fyra kapiteltyper räknas. Spelmodulerna saknades tidigare i båda
 // funktionerna, så Ordbyn visade "1/48" fast världen har 50 kapitel, och
 // poängen därifrån syntes inte alls på stadiekortet.
@@ -82,6 +87,7 @@ export default function HomePage() {
   const [student,        setStudent]        = useState<StudentData | null>(null);
   const [nameInput,      setNameInput]      = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState("ninja");
+  const [avatarPicked,   setAvatarPicked]   = useState(false);
   const [loading,        setLoading]        = useState(true);
   const [returningName,  setReturningName]  = useState<string | null>(null);
   const [dailyBonus,     setDailyBonus]     = useState(0);
@@ -112,7 +118,10 @@ export default function HomePage() {
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     if (!nameInput.trim()) return;
-    setStudent(createStudent(nameInput.trim(), selectedAvatar));
+    // En elev som redan finns behåller sin figur om den inte valt en ny här –
+    // annars blev den förvalda Ninjan, och figurer utanför de åtta på
+    // inloggningen gick inte att få tillbaka.
+    setStudent(createStudent(nameInput.trim(), returningName && !avatarPicked ? undefined : selectedAvatar));
   }
 
   function handleLogout() {
@@ -132,17 +141,20 @@ export default function HomePage() {
 
   // ─── Login screen ─────────────────────────────────────────────────────────────
   if (!student) {
-    // pb-12: den fasta kontaktlisten längst ned ligger ovanpå sidan, så kortet
-    // behöver marginal för att inte hamna under den på låga skärmar.
+    // Hela inloggningen ska rymmas utan scroll, även på en liten mobil med
+    // Safaris adressfält och en Chromebook. 100dvh är den synliga höjden. På
+    // låga skärmar (max-height-varianterna nedan) döljs underrubrikerna och
+    // flaggan krymper eller döljs.
+    // pb-14: den fasta kontaktlisten längst ned ligger ovanpå sidan.
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 pb-12">
+      <div className="min-h-[100dvh] flex items-center justify-center px-4 pt-3 pb-14">
         <div className="w-full max-w-md">
 
           {/* Title */}
           <BlurFade delay={0} duration={0.5} inView>
-            <div className="text-center mb-5">
+            <div className="text-center mb-3">
               <div
-                className="inline-flex items-center justify-center w-24 h-24 rounded-3xl mb-4 animate-float border-4 border-white/30 overflow-hidden"
+                className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 [@media(max-height:640px)]:w-11 [@media(max-height:640px)]:h-11 [@media(max-height:540px)]:hidden rounded-2xl mb-1.5 animate-float border-[3px] border-white/30 overflow-hidden"
                 style={{
                   background: "rgba(255,255,255,0.15)",
                   backdropFilter: "blur(8px)",
@@ -153,11 +165,11 @@ export default function HomePage() {
               </div>
               {/* text-4xl på smala telefoner: text-5xl gjorde titeln bredare än
                   skärmen, så hela startsidan gick att dra i sidled. */}
-              <h1 className="text-4xl xs:text-5xl font-black tracking-tight text-white drop-shadow-lg">
+              <h1 className="text-3xl xs:text-4xl font-black tracking-tight text-white drop-shadow-lg">
                 Engelskajakten
               </h1>
-              <p className="mt-2 text-lg font-bold">
-                <AnimatedGradientText className="text-lg font-black" style={{
+              <p className="mt-0.5 text-base font-bold [@media(max-height:640px)]:hidden">
+                <AnimatedGradientText className="text-base font-black" style={{
                   backgroundImage: "linear-gradient(135deg, #fbbf24, #f9fafb, #60a5fa, #f9fafb, #fbbf24)",
                   backgroundSize: "300% auto",
                 }}>
@@ -170,23 +182,23 @@ export default function HomePage() {
           {/* Login card */}
           <BlurFade delay={0.15} duration={0.5} inView>
             <div
-              className="bg-white rounded-4xl p-6"
+              className="bg-white rounded-3xl p-5"
               style={{
                 boxShadow: "0 8px 0 0 rgba(0,0,0,0.2), 0 20px 40px -8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.9)"
               }}
             >
-              <h2 className="text-2xl font-black mb-0.5" style={{ color: "#1e3268" }}>Välkommen!</h2>
-              <p className="text-gray-500 text-sm mb-5 font-medium">
+              <h2 className="text-xl font-black mb-0.5 [@media(max-height:640px)]:mb-2" style={{ color: "#1e3268" }}>Välkommen!</h2>
+              <p className="text-gray-500 text-sm mb-3 font-medium [@media(max-height:640px)]:hidden">
                 Skriv ditt namn för att börja eller fortsätta.
               </p>
 
-              <form onSubmit={handleLogin} className="space-y-4">
+              <form onSubmit={handleLogin} className="space-y-3">
                 <input
                   type="text"
                   value={nameInput}
                   onChange={(e) => handleNameChange(e.target.value)}
                   placeholder="Ditt namn..."
-                  className="input-field !py-3 !text-base"
+                  className="input-field !py-2.5 !text-base"
                   autoFocus
                   maxLength={30}
                 />
@@ -204,13 +216,13 @@ export default function HomePage() {
 
                 {/* Avatar selection */}
                 <div>
-                  <p className="text-sm font-bold mb-2.5" style={{ color: "#1e40af" }}>Välj din karaktär</p>
-                  <div className="grid grid-cols-8 gap-2">
-                    {AVATARS.map((avatar) => (
+                  <p className="text-sm font-bold mb-2" style={{ color: "#1e40af" }}>Välj din karaktär</p>
+                  <div className="grid grid-cols-8 gap-1.5 sm:gap-2">
+                    {LOGIN_AVATARS.map((avatar) => (
                       <button
                         key={avatar.id}
                         type="button"
-                        onClick={() => setSelectedAvatar(avatar.id)}
+                        onClick={() => { setSelectedAvatar(avatar.id); setAvatarPicked(true); }}
                         title={avatar.name}
                         className={`aspect-square rounded-2xl flex items-center justify-center transition-all duration-200 overflow-hidden text-xl cursor-pointer border-3 ${
                           selectedAvatar === avatar.id
@@ -231,7 +243,7 @@ export default function HomePage() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs font-bold mt-1.5 text-center text-en-500">
+                  <p className="text-xs font-bold mt-1 text-center text-en-500 [@media(max-height:560px)]:hidden">
                     {AVATARS.find((a) => a.id === selectedAvatar)?.name}
                   </p>
                 </div>
@@ -239,7 +251,7 @@ export default function HomePage() {
                 <ShimmerButton
                   type="submit"
                   disabled={!nameInput.trim()}
-                  className="w-full py-3.5 text-base rounded-2xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  className="w-full py-3 text-base rounded-2xl disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                   background={nameInput.trim()
                     ? "linear-gradient(135deg, #dc2626, #b91c1c)"
                     : "rgba(0,0,0,0.1)"
@@ -258,7 +270,7 @@ export default function HomePage() {
                   Ligger inne i det vita kortet: utanför hamnade den bakom den
                   fasta kontaktlisten på iPad och helt utanför fönstret på en
                   skärm som är 768 px hög. */}
-              <div className="text-center mt-4 pt-4 border-t border-en-100 flex flex-col items-center">
+              <div className="text-center mt-3 pt-3 border-t border-en-100 flex flex-col items-center gap-1">
                 <Link prefetch={false}
                   href="/om"
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-en-600 hover:text-en-700 hover:underline underline-offset-4 transition-colors"
@@ -268,7 +280,7 @@ export default function HomePage() {
                 </Link>
                 <Link prefetch={false}
                   href="/flytta"
-                  className="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-en-600 hover:text-en-700 hover:underline underline-offset-4 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-en-600 hover:text-en-700 hover:underline underline-offset-4 transition-colors"
                 >
                   <span aria-hidden="true">📲</span>
                   Byter du enhet? Läs in dina framsteg här

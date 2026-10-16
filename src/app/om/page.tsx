@@ -7,17 +7,9 @@ import { loadStudent } from "@/lib/storage";
 import { STAGES } from "@/lib/stages";
 import { CHEST_META } from "@/lib/gamification";
 import type { StudentData, ChestType } from "@/lib/types";
-import { JAKT_APPS } from "@/components/ui/JakterMenu";
+import { MARTINS_JAKTER_URL } from "@/components/ui/MartinsJakter";
 import SpriteImage from "@/components/ui/SpriteImage";
 import UnionJack from "@/components/ui/UnionJack";
-
-/** Vad varje app i Jaktlänkar tränar. Länkarna själva kommer från menyn. */
-const JAKT_BESKRIVNING: Record<string, string> = {
-  Läsjakten: "läsförståelse på svenska.",
-  Mattejakten: "matematik.",
-  Svenskajakten: "svenska.",
-  Readhunt: "läsförståelse på engelska.",
-};
 
 // ─── Om Engelskajakten ────────────────────────────────────────────────────────
 // Förklarar appen för elever, vårdnadshavare och kollegor. Siffrorna här speglar
@@ -345,35 +337,19 @@ export default function OmPage() {
           </p>
         </Section>
 
-        <Section emoji="🧭" title="Jaktlänkar">
+        <Section emoji="🧭" title="Martins jakter">
           <p>
-            Längst ned till höger på varje sida finns knappen <strong>Jaktlänkar ▴</strong>. Den
-            öppnar en meny med länkar till de andra apparna i samma familj. De öppnas i en ny flik, så
-            Engelskajakten ligger kvar där du var.
+            Längst ned till höger på varje sida finns länken <strong>Martins jakter</strong>. Den öppnar{" "}
+            <a
+              href={MARTINS_JAKTER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-en-600 dark:text-en-300 underline underline-offset-2 hover:text-en-700"
+            >
+              martinsjakter.vercel.app
+            </a>{" "}
+            i en ny flik, där alla Martins appar finns samlade. Engelskajakten ligger kvar där du var.
           </p>
-          <ul className="space-y-2.5">
-            {JAKT_APPS.map((app) => (
-              <li key={app.url} className="flex gap-3 items-start">
-                <span className="flex-none w-8 h-8 rounded-xl bg-en-50 dark:bg-gray-700 flex items-center justify-center" aria-hidden="true">
-                  {app.icon}
-                </span>
-                <span>
-                  <a
-                    href={app.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-bold text-en-600 dark:text-en-300 underline underline-offset-2 hover:text-en-700"
-                  >
-                    {app.label}
-                  </a>{" "}
-                  – {JAKT_BESKRIVNING[app.label] ?? ""}{" "}
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    ({app.url.replace("https://", "")})
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </Section>
 
         <Section emoji="💡" title="Bra att veta">

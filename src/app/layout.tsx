@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import AnalyticsInit from "@/components/AnalyticsInit";
-import JakterMenu from "@/components/ui/JakterMenu";
+import MartinsJakter from "@/components/ui/MartinsJakter";
 import ThemedBackdrop from "@/components/ui/ThemedBackdrop";
 
 const FAVICON_SVG =
@@ -69,7 +69,7 @@ export default function RootLayout({
             <span aria-hidden="true">✉️</span>
             Kontakta Martin
           </a>
-          <JakterMenu />
+          <MartinsJakter />
         </div>
       </body>
     </html>

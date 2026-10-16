@@ -339,16 +339,16 @@ export default function OmPage() {
 
         <Section emoji="🧭" title="Martins jakter">
           <p>
-            Längst ned till höger på varje sida finns länken <strong>Martins jakter</strong>. Den öppnar{" "}
+            Längst ned till höger på varje sida finns länken{" "}
             <a
               href={MARTINS_JAKTER_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold text-en-600 dark:text-en-300 underline underline-offset-2 hover:text-en-700"
             >
-              martinsjakter.vercel.app
-            </a>{" "}
-            i en ny flik, där alla Martins appar finns samlade. Engelskajakten ligger kvar där du var.
+              Martins jakter
+            </a>. Den öppnas i en ny flik,
+            och där finns alla Martins appar samlade. Engelskajakten ligger kvar där du var.
           </p>
         </Section>
 

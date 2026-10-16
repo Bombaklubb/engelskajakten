@@ -382,6 +382,23 @@ export default function OmPage() {
           </ul>
         </Section>
 
+        <Section emoji="☕" title="Stöd projektet">
+          <p>
+            Apparna är gratis och utan reklam. Vill du hjälpa till med driften och utvecklingen av nya jakter kan du bjuda på en kaffe. Varje donation gör skillnad.
+          </p>
+          <p>
+            <a
+              href="https://buymeacoffee.com/elvz83"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 font-bold shadow-sm hover:brightness-95 transition"
+              style={{ background: "#FFDD00", color: "#1f2937" }}
+            >
+              <span aria-hidden="true">☕</span> Buy me a coffee
+            </a>
+          </p>
+        </Section>
+
         <Section emoji="©️" title="Upphovsrätt">
           <p>
             Engelskajakten är skapad av Martin Akdogan. Övningar, texter, upplägg, design och namnet

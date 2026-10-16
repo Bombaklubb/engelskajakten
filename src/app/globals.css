@@ -349,3 +349,26 @@
   .ps-key-chapter h3 { font-size: 10.5pt; font-weight: 800; margin: 6pt 0 2pt; }
   .ps-key-list { columns: 2; font-size: 10pt; padding-left: 26pt; margin: 0; list-style: decimal; }
 }
+
+/* Ram runt länken "Martins jakter" i samma färger som färgraden på
+   martinsjakter.vercel.app, men dämpade så att den inte sticker ut. Ramen
+   ritas med en mask, så den fungerar på alla bakgrunder och teman. */
+.martins-jakter-ram {
+  position: relative;
+}
+.martins-jakter-ram::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(90deg,
+    #2f5fb3 0 12.5%, #d9434f 12.5% 25%, #8b4fe0 25% 37.5%, #233f8c 37.5% 50%,
+    #f2a531 50% 62.5%, #c2185b 62.5% 75%, #5a50e0 75% 87.5%, #7a35d6 87.5% 100%);
+  opacity: 0.55;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}

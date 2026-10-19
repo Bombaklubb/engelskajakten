@@ -5,43 +5,6 @@ import { fetchTeacherStats, type TeacherStats } from "@/services/analyticsServic
 import { RefreshCw, LogOut, Monitor, Users } from "lucide-react";
 import UnionJack from "@/components/ui/UnionJack";
 
-const questionTypeLabels: Record<string, string> = {
-  grammar: "Grammatik",
-  reading: "Läsning",
-  spelling: "Stavning",
-  wordsearch: "Ordsökning",
-  spel: "Spel",
-};
-
-function StatCard({
-  icon,
-  value,
-  label,
-  accent,
-}: {
-  icon: React.ReactNode;
-  value: React.ReactNode;
-  label: string;
-  accent: string;
-}) {
-  return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center gap-3">
-      <div className={`w-12 h-12 ${accent} rounded-full flex items-center justify-center`}>
-        {icon}
-      </div>
-      <div className="text-3xl font-black text-slate-800 dark:text-white">{value}</div>
-      <div className="text-sm text-slate-500 dark:text-slate-400">{label}</div>
-    </div>
-  );
-}
-
-function formatDateShort(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("sv-SE", {
-    day: "numeric",
-    month: "short",
-  });
-}
-
 export default function LararePage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
@@ -162,7 +125,7 @@ export default function LararePage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       {/* Header */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <UnionJack fit="fill" className="w-9 h-9 rounded-lg" />
             <div>
@@ -197,135 +160,61 @@ export default function LararePage() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8 space-y-8">
+      <main className="max-w-4xl mx-auto px-4 py-5 space-y-5">
         {statsError && (
           <div className="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-800 dark:text-amber-200 px-4 py-3 rounded-xl">
             {statsError}
           </div>
         )}
 
-        {/* Översikt */}
         <section>
-          <h2 className="text-xs font-black tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-4">
-            Översikt
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {/* Inloggade nu */}
-            <StatCard
-              accent="bg-emerald-100 dark:bg-emerald-900/40"
-              icon={<div className="w-5 h-5 bg-emerald-500 rounded-full animate-pulse" />}
-              value={stats?.activeNow ?? "–"}
-              label="Inloggade nu"
-            />
-            {/* Inloggade idag */}
-            <StatCard
-              accent="bg-violet-100 dark:bg-violet-900/40"
-              icon={<Users className="w-5 h-5 text-violet-600 dark:text-violet-400" />}
-              value={stats?.visitorsToday ?? "–"}
-              label="Inloggade idag"
-            />
-            {/* Unika enheter – verkligt unika över hela historiken */}
-            <StatCard
-              accent="bg-sky-100 dark:bg-sky-900/40"
-              icon={<Monitor className="w-5 h-5 text-sky-600 dark:text-sky-400" />}
-              value={stats?.uniqueDevices ?? "–"}
-              label="Unika enheter totalt"
-            />
-          </div>
-          <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-            <strong>Unika enheter totalt</strong> räknar varje enhet en gång, oavsett hur många
-            dagar den använts. Summan av staplarna nedan blir högre eftersom en elev som är
-            inne flera dagar syns en gång per dag.
-          </p>
-        </section>
-
-        {/* Daglig graf */}
-        <section>
-          <h2 className="text-xs font-black tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-4">
-            Dagliga uppgifter – senaste 14 dagarna
-          </h2>
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700">
-            {stats?.dailyStats && stats.dailyStats.length > 0 ? (
-              <div className="space-y-3">
-                {stats.dailyStats.map((day) => {
-                  const maxTasks = Math.max(...stats.dailyStats.map((d) => d.tasks), 1);
-                  const pct = (day.tasks / maxTasks) * 100;
-                  return (
-                    <div key={day.date} className="flex items-center gap-4">
-                      <div className="w-16 text-xs text-slate-400 dark:text-slate-500 text-right shrink-0">
-                        {formatDateShort(day.date)}
-                      </div>
-                      <div className="flex-1 bg-slate-100 dark:bg-slate-700 rounded-full h-5 overflow-hidden">
-                        <div
-                          className="bg-blue-500 h-full rounded-full transition-all duration-500"
-                          style={{ width: `${Math.max(pct, day.tasks > 0 ? 2 : 0)}%` }}
-                        />
-                      </div>
-                      <div className="w-8 text-xs text-slate-600 dark:text-slate-300 text-right font-semibold shrink-0">
-                        {day.tasks}
-                      </div>
-                    </div>
-                  );
-                })}
+          <h2 className="text-xs font-black tracking-widest text-slate-400 uppercase mb-3">Översikt</h2>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            <div className="min-w-0 bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 border-2 border-emerald-300 dark:border-emerald-700 text-center flex flex-col items-center gap-2 shadow-sm">
+              <div className="w-11 h-11 bg-emerald-100 dark:bg-emerald-900/50 rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-emerald-500 rounded-full animate-pulse" />
               </div>
-            ) : (
-              <p className="text-center text-slate-400 dark:text-slate-500 py-8">
-                Ingen statistik tillgänglig ännu
-              </p>
-            )}
+              <div className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">{stats?.activeNow ?? "–"}</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Inloggade nu</div>
+            </div>
+            <div className="min-w-0 bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center gap-2 shadow-sm">
+              <div className="w-11 h-11 bg-sky-100 dark:bg-sky-900/50 rounded-full flex items-center justify-center">
+                <Monitor className="w-5 h-5 text-sky-600 dark:text-sky-400" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">{stats?.visitorsToday ?? "–"}</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Enheter idag</div>
+            </div>
+            <div className="min-w-0 bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-700 text-center flex flex-col items-center gap-2 shadow-sm">
+              <div className="w-11 h-11 bg-indigo-100 dark:bg-indigo-900/50 rounded-full flex items-center justify-center">
+                <Users className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-black text-slate-800 dark:text-white">{stats?.uniqueDevices ?? "–"}</div>
+              <div className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Unika enheter totalt</div>
+            </div>
           </div>
         </section>
 
-        {/* Vanligaste fel */}
-        {stats?.topErrors && stats.topErrors.length > 0 && (
-          <section>
-            <h2 className="text-xs font-black tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-4">
-              Vanligaste feltyper (14 dagar)
-            </h2>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 divide-y divide-slate-100 dark:divide-slate-700 overflow-hidden">
-              {stats.topErrors.map((err, i) => (
-                <div key={err.type} className="flex items-center px-6 py-4 gap-4">
-                  <span className="text-base font-black text-slate-300 dark:text-slate-600 w-5 text-center">
-                    {i + 1}
-                  </span>
-                  <span className="flex-1 text-slate-700 dark:text-slate-200 font-medium">
-                    {questionTypeLabels[err.type] ?? err.type}
-                  </span>
-                  <span className="font-black text-red-600 dark:text-red-400">
-                    {err.count} fel
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* GDPR-info + statistikstart */}
-        <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-5 space-y-3">
-          <div className="flex items-start gap-3">
-            <span className="text-xl leading-none mt-0.5">🔒</span>
-            <div>
-              <p className="font-bold text-emerald-800 dark:text-emerald-300 text-sm">GDPR-säkrad statistik</p>
-              <p className="text-emerald-700 dark:text-emerald-400 text-sm mt-1">
-                Inga personuppgifter samlas in. Varje enhet identifieras av ett slumpmässigt anonymt ID
-                som inte kan kopplas till en person. All statistik är aggregerad och visas
-                aldrig på individnivå.
-              </p>
-              <ul className="mt-2 space-y-1 text-xs text-emerald-600 dark:text-emerald-500">
-                <li>✓ Inga namn, IP-adresser eller inloggningsuppgifter lagras</li>
-                <li>✓ Anonymt enhets-ID (UUID) – kan inte kopplas till en elev</li>
-                <li>✓ Endast summerad data visas (antal, tid, uppgifter)</li>
-              </ul>
-            </div>
+        {/* GDPR – samma ruta i alla jakter */}
+        <section className="rounded-2xl overflow-hidden border border-green-700/40" style={{ background: "#0d1f1a" }}>
+          <div className="p-4 sm:p-5">
+            <p className="font-black text-green-400 text-sm mb-2">🔒 GDPR-säkrad statistik</p>
+            <p className="text-green-300 text-sm mb-2">
+              Inga personuppgifter samlas in. Varje enhet identifieras av ett slumpmässigt anonymt ID som inte kan kopplas till en person. All statistik är aggregerad och visas aldrig på individnivå.
+            </p>
+            <ul className="space-y-0.5 text-green-400 text-sm">
+              <li>✓ Inga namn, IP-adresser eller inloggningsuppgifter lagras</li>
+              <li>✓ Anonymt enhets-ID (UUID) – kan inte kopplas till en elev</li>
+              <li>✓ Endast summerad data visas (antal enheter)</li>
+            </ul>
           </div>
-          <div className="flex items-center gap-2 pt-1 border-t border-emerald-200 dark:border-emerald-800">
-            <span className="text-base leading-none">📅</span>
-            <p className="text-xs text-emerald-600 dark:text-emerald-500">
-              Engelskajakten började samla in anonym statistik <strong>14 april 2026</strong>.
-              Data äldre än 14 dagar visas inte i grafen.
+          <div className="border-t border-green-700/40 px-4 sm:px-5 py-3 flex items-center gap-2">
+            <span className="text-base" aria-hidden="true">📅</span>
+            <p className="text-green-300 text-sm">
+              Engelskajakten började samla in anonym statistik{" "}
+              <strong className="text-green-200">14 april 2026</strong>.
             </p>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );

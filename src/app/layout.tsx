@@ -1,4 +1,9 @@
 import type { Metadata, Viewport } from "next";
+// Samma typsnitt som Grundjakten, självhostade: Outfit för rubriker, knappar
+// och etiketter, Lexend för text eleven ska läsa. Inga anrop till Google
+// Fonts, så ingen elevs IP-adress skickas vidare.
+import "@fontsource-variable/outfit/wght.css";
+import "@fontsource-variable/lexend/wght.css";
 import "./globals.css";
 import AnalyticsInit from "@/components/AnalyticsInit";
 import MartinsJakter from "@/components/ui/MartinsJakter";
@@ -54,19 +59,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv" suppressHydrationWarning>
-      <head>
-        {/* Samma typsnitt som Grundjakten. Outfit för rubriker, knappar och
-            etiketter (geometriskt, inte rundat), Lexend för text eleven ska
-            läsa (framtaget för läsflyt). Förut låg en @import efter
-            @tailwind i globals.css – den ignoreras av webbläsaren, så Baloo 2
-            laddades aldrig och appen visade systemets typsnitt. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Lexend:wght@400;500;600;700&display=swap"
-        />
-      </head>
       <body className="min-h-screen">
         <ThemedBackdrop />
         <AnalyticsInit />

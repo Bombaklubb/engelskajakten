@@ -104,7 +104,7 @@ export default function ModuleCard({
   if (locked) {
     return (
       <div
-        className="h-full rounded-2xl border-3 border-indigo-100 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 opacity-50 cursor-not-allowed select-none"
+        className="h-full rounded-2xl border-3 border-slate-900/10 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-3 opacity-50 cursor-not-allowed select-none"
         style={{ boxShadow: "0 3px 0 0 rgba(99, 102, 241, 0.1), inset 0 2px 4px 0 rgba(255, 255, 255, 0.5)" }}
       >
         <div className="flex items-center gap-3">
@@ -216,9 +216,9 @@ export default function ModuleCard({
     <Link prefetch={false} href={href} className="block group h-full">
       <MagicCard
         gradientColor={`${beamColors[0]}18`}
-        className="h-full rounded-3xl border-3 px-5 py-4 transition-all duration-200 group-hover:-translate-y-1 cursor-pointer relative overflow-hidden bg-white dark:bg-gray-800 border-indigo-100 dark:border-gray-700 group-hover:border-indigo-200"
+        className="h-full rounded-3xl border-3 px-5 py-4 transition-all duration-200 group-hover:-translate-y-1 cursor-pointer relative overflow-hidden bg-white dark:bg-gray-800 border-slate-900/15 dark:border-gray-700 group-hover:border-indigo-400"
         style={{
-          boxShadow: "0 4px 0 0 rgba(99, 102, 241, 0.15), 0 8px 16px -4px rgba(99, 102, 241, 0.1), inset 0 2px 4px 0 rgba(255, 255, 255, 0.8)"
+          boxShadow: "0 4px 0 0 rgba(0, 0, 0, 0.18)"
         } as React.CSSProperties}
       >
         {progress?.completed && (

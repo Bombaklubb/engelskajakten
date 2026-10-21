@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800;900&family=Comic+Neue:wght@300;400;700&display=swap');
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -49,8 +47,13 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
+  /* Typsnitten laddas med en länk i layout.tsx. */
+  :root {
+    --font-outfit: 'Outfit';
+    --font-lexend: 'Lexend';
+  }
   html {
-    font-family: 'Baloo 2', 'Comic Neue', system-ui, sans-serif;
+    font-family: var(--font-outfit), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
   }
@@ -66,6 +69,12 @@
   }
 
 
+  /* Text eleven ska läsa: Lexend. */
+  p, li, blockquote, input, textarea {
+    font-family: var(--font-lexend), system-ui, sans-serif;
+    letter-spacing: 0.005em;
+  }
+
   .dark body {
     background: linear-gradient(160deg, #0a0f2e 0%, #0d1a4a 28%, #450a0a 62%, #6b0f0f 100%) fixed;
     background-attachment: fixed;
@@ -73,64 +82,53 @@
 }
 
 @layer components {
-  /* Claymorphism card – English style */
+  /* Kort: kantigt-men-mjukt, mörk kant och hård "arcade"-skugga, som i
+     Grundjakten. */
   .card {
-    @apply bg-white rounded-3xl p-4 sm:p-6 border-3 border-en-100 text-gray-900;
-    box-shadow:
-      0 4px 0 0 rgba(37, 99, 235, 0.12),
-      0 8px 16px -4px rgba(37, 99, 235, 0.08),
-      inset 0 2px 4px 0 rgba(255, 255, 255, 0.8);
+    @apply bg-white p-4 sm:p-6 text-gray-900;
+    border-radius: 1.25rem;
+    border: 2px solid rgb(15 23 42 / 0.15);
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.18);
   }
 
   .dark .card {
-    @apply bg-gray-800 border-gray-600 text-gray-100;
-    box-shadow:
-      0 4px 0 0 rgba(0, 0, 0, 0.3),
-      0 8px 16px -4px rgba(0, 0, 0, 0.2),
-      inset 0 2px 4px 0 rgba(255, 255, 255, 0.05);
+    @apply bg-gray-800 text-gray-100;
+    border-color: rgb(255 255 255 / 0.12);
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.45);
   }
 
-  /* Clay button */
+  /* Arcade-knapp, samma som Grundjaktens .btn-pop: tjock kant och hård
+     skugga som trycks ned vid klick. */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 rounded-2xl font-bold text-white transition-all duration-200 cursor-pointer border-3 border-transparent;
-    box-shadow:
-      0 4px 0 0 rgba(0, 0, 0, 0.2),
-      0 6px 12px -2px rgba(0, 0, 0, 0.15),
-      inset 0 2px 4px 0 rgba(255, 255, 255, 0.3);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 font-extrabold text-white transition-all duration-200 cursor-pointer;
+    border-radius: 1rem;
+    border: 2px solid rgb(15 23 42 / 0.2);
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.25);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow:
-      0 6px 0 0 rgba(0, 0, 0, 0.2),
-      0 10px 20px -2px rgba(0, 0, 0, 0.2),
-      inset 0 2px 4px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 6px 0 0 rgb(0 0 0 / 0.25);
   }
   .btn-primary:active {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 0 rgba(0, 0, 0, 0.2),
-      0 2px 4px -1px rgba(0, 0, 0, 0.1),
-      inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 0 rgb(0 0 0 / 0.25);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 rounded-2xl font-bold border-3 transition-all duration-200 cursor-pointer bg-white;
-    box-shadow:
-      0 3px 0 0 rgba(37, 99, 235, 0.18),
-      0 4px 8px -2px rgba(37, 99, 235, 0.1),
-      inset 0 2px 4px 0 rgba(255, 255, 255, 0.8);
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 font-extrabold transition-all duration-200 cursor-pointer bg-white;
+    border-radius: 1rem;
+    border: 2px solid rgb(15 23 42 / 0.2);
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.18);
   }
-  .btn-secondary:hover  { transform: translateY(-2px); }
+  .btn-secondary:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 0 rgb(0 0 0 / 0.18); }
   .btn-secondary:active {
-    transform: translateY(1px);
-    box-shadow:
-      0 1px 0 0 rgba(37, 99, 235, 0.18),
-      inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 0 rgb(0 0 0 / 0.18);
   }
 
   /* Clay input field */
   .input-field {
-    @apply w-full px-5 py-4 rounded-2xl border-3 border-en-200 bg-white text-en-900 focus:border-en-500 focus:outline-none text-lg transition-all font-medium;
+    @apply w-full px-5 py-4 rounded-2xl border-2 border-en-300 bg-white text-en-900 focus:border-en-500 focus:outline-none text-lg transition-all font-medium;
     box-shadow:
       inset 0 3px 6px -2px rgba(37, 99, 235, 0.08),
       0 2px 0 0 rgba(255, 255, 255, 0.8);
@@ -306,7 +304,7 @@
     display: block;
     color: #111;
     background: #fff;
-    font-family: "Baloo 2", system-ui, sans-serif;
+    font-family: var(--font-outfit), system-ui, sans-serif;
     font-size: 11pt;
     line-height: 1.45;
     -webkit-print-color-adjust: exact;

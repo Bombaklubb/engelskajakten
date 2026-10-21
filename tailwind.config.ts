@@ -30,7 +30,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ["Baloo 2", "Comic Neue", "system-ui", "sans-serif"],
+        sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        reading: ["var(--font-lexend)", "system-ui", "sans-serif"],
       },
       borderWidth: {
         "3": "3px",
@@ -40,7 +41,7 @@ const config: Config = {
         lg:   "var(--radius)",
         md:   "calc(var(--radius) - 2px)",
         sm:   "calc(var(--radius) - 4px)",
-        "3xl": "1.5rem",
+        "3xl": "1.25rem", // Grundjaktens kortradie: kantigt-men-mjukt
         "4xl": "2rem",
       },
       colors: {

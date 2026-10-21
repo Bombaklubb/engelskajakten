@@ -9,9 +9,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground border-3 border-transparent shadow-[0_4px_0_0_rgba(0,0,0,0.2),0_6px_12px_-2px_rgba(0,0,0,0.15),inset_0_2px_4px_0_rgba(255,255,255,0.3)] hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_rgba(0,0,0,0.2),0_10px_20px_-2px_rgba(0,0,0,0.2)] active:translate-y-0.5 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)]",
+          "bg-primary text-primary-foreground border-2 border-slate-900/20 shadow-[0_4px_0_0_rgba(0,0,0,0.25)] hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_rgba(0,0,0,0.2),0_10px_20px_-2px_rgba(0,0,0,0.2)] active:translate-y-0.5 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)]",
         secondary:
-          "bg-white text-foreground border-3 border-indigo-200 shadow-[0_3px_0_0_rgba(99,102,241,0.2),0_4px_8px_-2px_rgba(99,102,241,0.1),inset_0_2px_4px_0_rgba(255,255,255,0.8)] hover:-translate-y-0.5 active:translate-y-px",
+          "bg-white text-foreground border-2 border-slate-900/20 shadow-[0_4px_0_0_rgba(0,0,0,0.18)] hover:-translate-y-0.5 active:translate-y-px",
         outline:
           "border-2 border-border bg-background hover:bg-accent hover:text-accent-foreground",
         ghost: "hover:bg-accent hover:text-accent-foreground",

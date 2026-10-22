@@ -92,6 +92,11 @@ export default function config(phase: string): NextConfig {
             { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
           ],
         },
+        {
+          // Sökrobotar hämtar robots.txt ofta; ett dygn räcker gott.
+          source: "/robots.txt",
+          headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+        },
         // ── Filer med hash i namnet: för alltid. MÅSTE stå sist. ──
         {
           source: "/sprites/:file*",

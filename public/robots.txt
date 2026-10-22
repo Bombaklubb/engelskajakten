@@ -1,0 +1,7 @@
+# Sökmotorer får läsa startsidan och Om-sidan. Övriga sidor (världar, kapitel,
+# spel) är elevernas övningar: varje gång en sökrobot hämtar en av dem räknas
+# det mot appens gräns för anrop hos Vercel, och de behövs inte i sökresultaten.
+User-agent: *
+Allow: /$
+Allow: /om
+Disallow: /

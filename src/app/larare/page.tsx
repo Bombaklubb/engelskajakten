@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchTeacherStats, type TeacherStats } from "@/services/analyticsService";
 import { RefreshCw, LogOut, Monitor, Users } from "lucide-react";
 import UnionJack from "@/components/ui/UnionJack";
@@ -46,42 +46,9 @@ export default function LararePage() {
     setLoading(false);
   }
 
-  // Uppdateras varannan minut, och bara när fliken faktiskt tittas på. Förut
-  // hämtades statistiken var trettionde sekund så länge fliken fanns — en flik
-  // som stod öppen en skoldag drog tiotusentals Redis-kommandon utan att någon
-  // såg dem. Återvänder man till fliken hämtas siffrorna direkt, så det som
-  // visas är aldrig gammalt.
-  useEffect(() => {
-    if (!authenticated) return;
-
-    let timer: ReturnType<typeof setInterval> | null = null;
-
-    function start() {
-      if (timer) return;
-      timer = setInterval(refreshStats, 2 * 60_000);
-    }
-    function stop() {
-      if (!timer) return;
-      clearInterval(timer);
-      timer = null;
-    }
-    function onVisibility() {
-      if (document.hidden) {
-        stop();
-      } else {
-        refreshStats();
-        start();
-      }
-    }
-
-    if (!document.hidden) start();
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => {
-      stop();
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authenticated, password]);
+  // Statistiken hämtas vid inloggningen och när läraren trycker på Uppdatera –
+  // inte av sig själv. Förut hämtades den varannan minut medan fliken syntes,
+  // och en flik som stod öppen en skoldag kostade runt 240 anrop mot Vercels tak.
 
   if (!authenticated) {
     return (

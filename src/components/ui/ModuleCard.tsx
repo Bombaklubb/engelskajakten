@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ProgressBar from "./ProgressBar";
+import { chapterHref } from "@/lib/chapterLink";
 import type { ModuleProgress, Stage } from "@/lib/types";
 import { MagicCard } from "@/components/magicui/magic-card";
 import { BorderBeam } from "@/components/magicui/border-beam";
@@ -95,7 +96,8 @@ export default function ModuleCard({
   prevModuleTitle,
   isFinalTest = false,
 }: ModuleCardProps) {
-  const href = `/world/${stage.id}/${kind}/${id}`;
+  // Alla kapitel öppnas på världens kapitelsida (se lib/chapterLink.ts).
+  const href = chapterHref(stage.id, kind, id);
   const pct = progress?.completed ? 100 : 0;
   const beamColors = stageBeamColors[stage.id] ?? ["#6366f1", "#a855f7"];
   const kindInfo = kindLabels[kind];

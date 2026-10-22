@@ -2437,7 +2437,10 @@
             "fish"
           ],
           "correctIndex": 3,
-          "explanation": "Fish kan vara både singular och plural. One fish, two fish."
+          "explanation": "Fish kan vara både singular och plural. One fish, two fish. 'Fishes' är också rätt – det används mest om flera olika sorters fiskar.",
+          "alsoCorrect": [
+            2
+          ]
         },
         {
           "id": "lag-g4-14",
@@ -4577,7 +4580,10 @@
             "fishies"
           ],
           "correctIndex": 2,
-          "explanation": "'fish' är oregelbundet – plural är också 'fish'."
+          "explanation": "'fish' är oregelbundet – plural är oftast också 'fish': two fish. 'Fishes' är också rätt – det används mest om flera olika sorters fiskar.",
+          "alsoCorrect": [
+            1
+          ]
         },
         {
           "id": "lag-fill3-8",

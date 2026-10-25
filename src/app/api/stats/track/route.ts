@@ -20,9 +20,6 @@ interface TrackEvent {
   };
 }
 
-/** Rimlig övre gräns för kapitel i ett anrop (tio minuter). */
-const MAX_TASKS_PER_BATCH = 100;
-
 export async function POST(req: NextRequest) {
   try {
     const event: TrackEvent = await req.json();
@@ -36,83 +33,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid deviceId format' }, { status: 400 });
     }
 
-    switch (event.type) {
-      case 'pageview':
-        await redis.sadd(`${KEY_PREFIX}visitors:${today}`, event.deviceId);
-        // Permanent mängd över ALLA enheter som någonsin besökt appen.
-        // Dagsmängderna ovan kan bara summeras (vilket dubbelräknar
-        // återkommande elever) – den här ger verkligt unika enheter.
-        await redis.sadd(`${KEY_PREFIX}visitors:all`, event.deviceId);
-        await redis.incr(`${KEY_PREFIX}pageviews:${today}`);
-        // "Aktiva nu" som en sorterad mängd med tidsstämpel i stället för en
-        // nyckel per enhet med TTL. Nycklarna gick bara att räkna med KEYS,
-        // ett svep över hela nyckelrymden vid varje hämtning i lärarvyn.
-        // Samma kostnad här, men räkningen blir ett enda zcard.
-        await redis.zadd(`${KEY_PREFIX}active`, { score: Date.now(), member: event.deviceId });
-        break;
+    // Varje anrop håller eleven kvar under "Inloggade nu" i lärarvyn. "Aktiva
+    // nu" är en sorterad mängd med tidsstämpel, så lärarvyn räknar med ett zcard.
+    await redis.zadd(`${KEY_PREFIX}active`, { score: Date.now(), member: event.deviceId });
 
-      case 'task_complete':
-        await redis.incr(`${KEY_PREFIX}tasks:${today}`);
-        if (event.data?.correct === false && event.data?.questionType) {
-          await redis.hincrby(
-            `${KEY_PREFIX}errors:${today}`,
-            event.data.questionType,
-            1
-          );
-          await redis.incr(`${KEY_PREFIX}total_errors:${today}`);
-        }
-        break;
-
-      case 'session_time':
-        if (event.data?.timeSeconds && event.data.timeSeconds > 0) {
-          await redis.incrby(
-            `${KEY_PREFIX}time:${today}`,
-            Math.min(event.data.timeSeconds, 3600)
-          );
-        }
-        break;
-
-      // Appen samlar ihop klarade kapitel och tid och skickar dem i ett anrop
-      // (se analyticsService). task_complete och session_time ovan finns kvar
-      // för elever som har en äldre version av sidan öppen.
-      case 'batch': {
-        const tasks = Array.isArray(event.data?.tasks)
-          ? event.data.tasks.slice(0, MAX_TASKS_PER_BATCH)
-          : [];
-        if (tasks.length > 0) {
-          await redis.incrby(`${KEY_PREFIX}tasks:${today}`, tasks.length);
-          const errorsByType: Record<string, number> = {};
-          for (const t of tasks) {
-            if (t?.correct === false && typeof t.questionType === 'string' && t.questionType.length <= 40) {
-              errorsByType[t.questionType] = (errorsByType[t.questionType] ?? 0) + 1;
-            }
-          }
-          let totalErrors = 0;
-          for (const [questionType, n] of Object.entries(errorsByType)) {
-            await redis.hincrby(`${KEY_PREFIX}errors:${today}`, questionType, n);
-            totalErrors += n;
-          }
-          if (totalErrors > 0) await redis.incrby(`${KEY_PREFIX}total_errors:${today}`, totalErrors);
-        }
-        const seconds = Number(event.data?.timeSeconds);
-        if (seconds > 0) {
-          await redis.incrby(`${KEY_PREFIX}time:${today}`, Math.min(Math.round(seconds), 3600));
-        }
-        // Sidvisningen skickas bara en gång per flik, så varje rapport håller
-        // också eleven kvar under "Inloggade nu" i lärarvyn.
-        await redis.zadd(`${KEY_PREFIX}active`, { score: Date.now(), member: event.deviceId });
-        break;
-      }
-
-      case 'error':
-        if (event.data?.questionType) {
-          await redis.hincrby(
-            `${KEY_PREFIX}errors:${today}`,
-            event.data.questionType,
-            1
-          );
-        }
-        break;
+    // Bara det lärarvyn visar sparas: enheter idag och unika enheter totalt.
+    // Sidvisningar, kapitel, tid och fel sparades förut också (upp till sex
+    // kommandon per anrop) men visas inte längre. Databasen delas med
+    // Läsjakten och Readhunt och har ett tak på 500 000 kommandon i månaden,
+    // som tog slut i oktober 2026. Övriga typer ('batch' och äldre
+    // 'task_complete', 'session_time', 'error') kostar därför bara raden ovan.
+    if (event.type === 'pageview') {
+      await redis.sadd(`${KEY_PREFIX}visitors:${today}`, event.deviceId);
+      // Permanent mängd över alla enheter som någonsin besökt appen.
+      await redis.sadd(`${KEY_PREFIX}visitors:all`, event.deviceId);
     }
 
     return NextResponse.json({ success: true });

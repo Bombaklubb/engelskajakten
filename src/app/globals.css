@@ -372,3 +372,22 @@
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* Martins jakter lyser upp diskret när muspekaren är över länken. Bara på
+   enheter med muspekare (dator, Chromebook); på pekskärmar fastnar annars
+   effekten efter ett tryck. */
+@media (hover: hover) and (pointer: fine) {
+  .martins-jakter-ram {
+    transition: box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .martins-jakter-ram::before {
+    transition: opacity 0.25s ease;
+  }
+  .martins-jakter-ram:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 0 0 1px rgba(139, 79, 224, 0.12), 0 0 14px rgba(139, 79, 224, 0.3), 0 0 6px rgba(47, 95, 179, 0.25);
+  }
+  .martins-jakter-ram:hover::before {
+    opacity: 0.9;
+  }
+}

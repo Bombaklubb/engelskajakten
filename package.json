@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "sprites": "node scripts/build-sprites.mjs",
-    "test": "node scripts/check-sprites.mjs"
+    "test": "node scripts/check-sprites.mjs && node --experimental-strip-types --no-warnings --import ./tests/register.mjs --test tests/*.test.ts"
   },
   "dependencies": {
     "@fontsource-variable/lexend": "^5.3.0",

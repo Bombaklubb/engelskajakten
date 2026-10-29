@@ -1,6 +1,8 @@
 /**
  * Bygger ett ordsöksrutnät där alla ord finns: vågrätt, lodrätt, snett och
  * baklänges. Används av ordsökskapitlen och av utskriften ("Skriva ut").
+ * `rand` är Math.random; ett färdigt arbetshäfte skickar en fast slump, så
+ * att dess rutnät – och facit – blir likadant varje gång.
  */
 export type Cell = [number, number];
 export type Placement = { word: string; cells: Cell[] };
@@ -17,7 +19,8 @@ const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
  */
 function tryBuildGrid(
   words: string[],
-  gridSize: number
+  gridSize: number,
+  rand: () => number
 ): { grid: string[][]; placements: Placement[] } | null {
   const grid: string[][] = Array.from({ length: gridSize }, () => Array(gridSize).fill(""));
   const placements: Placement[] = [];
@@ -28,14 +31,14 @@ function tryBuildGrid(
   for (const word of ordered) {
     let placed = false;
     for (let attempt = 0; attempt < 400 && !placed; attempt++) {
-      const [dr, dc] = DIRECTIONS[Math.floor(Math.random() * DIRECTIONS.length)];
+      const [dr, dc] = DIRECTIONS[Math.floor(rand() * DIRECTIONS.length)];
       const rowMin = dr > 0 ? 0 : dr < 0 ? word.length - 1 : 0;
       const rowMax = dr > 0 ? gridSize - word.length : dr < 0 ? gridSize - 1 : gridSize - 1;
       const colMin = dc > 0 ? 0 : dc < 0 ? word.length - 1 : 0;
       const colMax = dc > 0 ? gridSize - word.length : dc < 0 ? gridSize - 1 : gridSize - 1;
       if (rowMin > rowMax || colMin > colMax) continue;
-      const row = rowMin + Math.floor(Math.random() * (rowMax - rowMin + 1));
-      const col = colMin + Math.floor(Math.random() * (colMax - colMin + 1));
+      const row = rowMin + Math.floor(rand() * (rowMax - rowMin + 1));
+      const col = colMin + Math.floor(rand() * (colMax - colMin + 1));
       const cells: Cell[] = [];
       let valid = true;
       for (let i = 0; i < word.length; i++) {
@@ -64,7 +67,7 @@ function tryBuildGrid(
  * flera försök med gradvis större rutnät, och det bästa försöket används som
  * sista utväg (WordSearch räknar då mot placements, inte mot ordlistan).
  */
-export function buildGrid(wordList: string[]): { grid: string[][]; placements: Placement[]; gridSize: number } {
+export function buildGrid(wordList: string[], rand: () => number = Math.random): { grid: string[][]; placements: Placement[]; gridSize: number } {
   const words = wordList.map((w) => w.toUpperCase());
   const longestWord = Math.max(...words.map((w) => w.length));
   const baseSize = Math.max(MIN_GRID_SIZE, longestWord + 2);
@@ -75,7 +78,7 @@ export function buildGrid(wordList: string[]): { grid: string[][]; placements: P
     const gridSize = baseSize + extra;
     // Flera omgångar per storlek – placeringen är slumpad.
     for (let round = 0; round < 3; round++) {
-      const result = tryBuildGrid(words, gridSize);
+      const result = tryBuildGrid(words, gridSize, rand);
       if (result) {
         best = { ...result, gridSize };
         break;
@@ -93,7 +96,7 @@ export function buildGrid(wordList: string[]): { grid: string[][]; placements: P
   // Fyll tomma rutor med slumpbokstäver
   for (let r = 0; r < best.gridSize; r++)
     for (let c = 0; c < best.gridSize; c++)
-      if (!best.grid[r][c]) best.grid[r][c] = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+      if (!best.grid[r][c]) best.grid[r][c] = LETTERS[Math.floor(rand() * LETTERS.length)];
 
   return best;
 }

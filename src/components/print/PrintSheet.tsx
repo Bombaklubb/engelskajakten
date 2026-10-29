@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import type { GrammarExercise, Stage, WordSearchWord, CoinGameQuestion } from "@/lib/types";
 import { buildGrid } from "@/lib/wordGrid";
+import { ExerciseBody, WordGridTable, dealExercise, type DealtExercise } from "@/components/print/printItems";
 
 export type PrintChapter =
   | { kind: "exercises"; title: string; exercises: GrammarExercise[] }
@@ -18,7 +19,18 @@ export type PrintChapter =
  * Flervalsalternativen blandas och ordsöksrutnäten byggs en gång per urval,
  * så facit alltid stämmer med frågorna ovanför.
  */
-export default function PrintSheet({ stage, chapters, withKey }: { stage: Stage; chapters: PrintChapter[]; withKey: boolean }) {
+export default function PrintSheet({
+  stage,
+  chapters,
+  withKey,
+  active = true,
+}: {
+  stage: Stage;
+  chapters: PrintChapter[];
+  withKey: boolean;
+  /** false: bladet ligger kvar men hålls utanför utskriften, medan ett färdigt arbetshäfte skrivs ut. */
+  active?: boolean;
+}) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -34,7 +46,7 @@ export default function PrintSheet({ stage, chapters, withKey }: { stage: Stage;
   });
 
   return createPortal(
-    <div className="print-sheet" aria-hidden="true">
+    <div className={`print-sheet${active ? "" : " print-off"}`} aria-hidden="true">
       <header className="ps-header">
         <div>
           <p className="ps-brand">Engelskajakten · {stage.name} ({stage.grades})</p>
@@ -78,69 +90,12 @@ interface Dealt {
   key: (start: number) => React.ReactNode;
 }
 
-const LETTERS = "ABCDEFGH";
-
-function shuffled<T>(list: T[]): T[] {
-  const a = [...list];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-/** "I have ___ apple." med en skrivlinje i luckan. */
-function withGap(text: string): React.ReactNode {
-  const parts = text.split("___");
-  if (parts.length === 1) return text;
-  return parts.map((p, i) => (
-    <span key={i}>
-      {p}
-      {i < parts.length - 1 && <span className="ps-gap" />}
-    </span>
-  ));
-}
-
-/** Flervalsfråga: alternativen i ny ordning, facit som "B – an". */
-function multipleChoice(question: string, options: string[], correctIndex: number, alsoCorrect: number[] = [], image?: string) {
-  const order = shuffled(options.map((_, i) => i));
-  const name = (oi: number) => `${LETTERS[order.indexOf(oi)]} – ${options[oi]}`;
-  const also = alsoCorrect.filter((i) => i !== correctIndex);
-  const answer = name(correctIndex) + (also.length ? ` (även ${also.map(name).join(", ")})` : "");
-  const body = (
-    <>
-      <p>
-        {image && <span className="ps-image">{image} </span>}
-        {withGap(question)}
-      </p>
-      <ul className="ps-options">
-        {order.map((oi, place) => (
-          <li key={oi}><span className="ps-circle" /> {LETTERS[place]}. {options[oi]}</li>
-        ))}
-      </ul>
-    </>
-  );
-  return { body, answer };
-}
-
 function deal(c: PrintChapter): Dealt {
   if (c.kind === "wordsearch") {
     const words = c.words.map((w) => w.word);
     const { grid, placements } = buildGrid(words);
     const onWord = new Set(placements.flatMap((p) => p.cells.map(([r, col]) => `${r}:${col}`)));
-    const table = (isKey: boolean) => (
-      <table className={`ps-grid ${isKey ? "ps-grid-key" : ""}`}>
-        <tbody>
-          {grid.map((row, r) => (
-            <tr key={r}>
-              {row.map((ch, col) => (
-                <td key={col} className={isKey && onWord.has(`${r}:${col}`) ? "ps-hit" : undefined}>{ch}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+    const table = (isKey: boolean) => <WordGridTable grid={grid} hits={onWord} isKey={isKey} />;
     return {
       title: c.title,
       count: 0,
@@ -160,40 +115,13 @@ function deal(c: PrintChapter): Dealt {
   }
 
   // Samla mynt-frågor och grammatik/stavning. Alternativen blandas här, en
-  // gång, så att bokstäverna på bladet och i facit stämmer.
-  const items: { body: React.ReactNode; answer: string }[] =
+  // gång, så att bokstäverna på bladet och i facit stämmer (se lib/printDeal).
+  const items: DealtExercise[] =
     c.kind === "questions"
-      ? c.questions.map((q) => multipleChoice(q.question, q.options, q.correctIndex))
-      : c.exercises.map((ex) => {
-          if (ex.type === "multiple-choice") {
-            return multipleChoice(ex.question, ex.options, ex.correctIndex, ex.alsoCorrect, ex.image);
-          }
-          if (ex.type === "fill-in-blank") {
-            return {
-              body: (
-                <>
-                  <p>{withGap(ex.sentence)}</p>
-                  {!ex.sentence.includes("___") && <span className="ps-line" />}
-                </>
-              ),
-              // Flera luckor skrivs "a ... b" i innehållet.
-              answer: ex.answer.split(/\s*\.\.\.\s*/).join(" / "),
-            };
-          }
-          // Orden ligger i rätt ordning i innehållet (appen blandar dem på
-          // skärmen), så de blandas här också – annars står svaret på bladet.
-          const chips = shuffled(ex.words);
-          return {
-            body: (
-              <>
-                <p>{ex.instruction}</p>
-                <p className="ps-chips">{chips.map((w, j) => <span key={j} className="ps-chip">{w}</span>)}</p>
-                <span className="ps-line" />
-              </>
-            ),
-            answer: ex.correctOrder.map((i) => ex.words[i]).join(" ").replace(/\s+([.,!?])/g, "$1"),
-          };
-        });
+      ? c.questions.map((q) =>
+          dealExercise({ id: q.id, type: "multiple-choice", question: q.question, options: q.options, correctIndex: q.correctIndex })
+        )
+      : c.exercises.map((ex) => dealExercise(ex));
 
   return {
     title: c.title,
@@ -201,7 +129,7 @@ function deal(c: PrintChapter): Dealt {
     body: (start) => (
       <ol className="ps-list" start={start}>
         {items.map((it, i) => (
-          <li key={i} className="ps-item">{it.body}</li>
+          <li key={i} className="ps-item"><ExerciseBody item={it} /></li>
         ))}
       </ol>
     ),

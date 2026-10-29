@@ -41,7 +41,7 @@ const AKTIVITETER = [
   { emoji: "🔍", name: "Ordsökning", desc: "Hitta gömda engelska ord i rutnätet. Lugnare träning på ordbilder." },
   { emoji: "🎮", name: "Spel", desc: "Memory, Hänga gubben, Tidsattack och Samla mynt. Alla ger riktiga poäng." },
   { emoji: "🔁", name: "Försök igen", desc: "Allt du svarat fel på samlas här. Rätta ett gammalt fel och det försvinner ur listan." },
-  { emoji: "🖨️", name: "Skriva ut", desc: "Välj kapitel eller enstaka frågor och skriv ut dem som ett arbetsblad, med eller utan facit." },
+  { emoji: "🖨️", name: "Skriva ut", desc: "Färdiga arbetshäften, eller välj själv kapitel och frågor och skriv ut dem som ett arbetsblad, med eller utan facit." },
 ];
 
 const SPEL = [
@@ -204,6 +204,15 @@ export default function OmPage() {
             Under fliken <strong>🖨️ Skriva ut</strong> i varje värld kan du göra ett arbetsblad på papper av
             övningarna – till exempel för en lektion, en läxa eller för den som hellre skriver för hand.
           </p>
+          <p>
+            Överst finns <strong>📘 Färdiga arbetshäften</strong>: fyra häften per värld, som var och ett tar upp
+            några av världens ämnen i tur och ordning. Framsidan har rader för namn och klass och en
+            innehållsförteckning med sidnummer. Sedan får varje ämne en egen sida med en kort regel att komma
+            ihåg, fyra eller fem uppgifter och rutan <strong>Det här kan jag</strong>, där eleven fyller i hur bra
+            hen kan det. Sist kommer ett ordsök, och facit om du vill ha det. Ett häfte ser likadant ut varje
+            gång, så hela klassen får samma uppgifter.
+          </p>
+          <p>Vill du hellre välja själv gör du så här:</p>
           <ul className="space-y-1.5 list-disc pl-5 marker:text-gray-400">
             <li>
               Bocka i hela kapitel, eller tryck på <strong>▼</strong> och välj enstaka frågor. Grammatik,

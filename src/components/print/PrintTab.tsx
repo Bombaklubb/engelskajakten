@@ -1,13 +1,17 @@
 "use client";
 
 import { useMemo, useRef, useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import type { StageContent, Stage, GrammarExercise, WordSearchModule, CoinGameModule } from "@/lib/types";
 import PrintSheet, { type PrintChapter } from "@/components/print/PrintSheet";
+import BookletSheet from "@/components/print/BookletSheet";
+import { buildBooklets } from "@/lib/booklets";
 
 /**
- * "Skriva ut": välj kapitel (eller enstaka frågor) i världen och skriv ut dem
- * som ett arbetsblad, med eller utan facit. Samma funktion som i
- * Svenskajakten, anpassad till Engelskajaktens innehåll.
+ * "Skriva ut": överst världens färdiga arbetshäften (se lib/booklets.ts och
+ * BookletSheet), och under dem "Välj själv": välj kapitel (eller enstaka
+ * frågor) och skriv ut dem som ett arbetsblad, med eller utan facit. Samma
+ * funktion som i Svenskajakten, anpassad till Engelskajaktens innehåll.
  *
  * Allt sker i webbläsaren: urvalet finns i den här komponenten, och bladet
  * ritas direkt i <body> (se PrintSheet) och syns bara vid utskrift. Inga anrop.
@@ -92,6 +96,11 @@ export default function PrintTab({ stage, content }: { stage: Stage; content: St
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [withKey, setWithKey] = useState(false);
 
+  /** Världens färdiga arbetshäften, och vilket som skrivs ut (null: det egna urvalet). */
+  const booklets = useMemo(() => buildBooklets(stage.id, content), [stage.id, content]);
+  const [booklet, setBooklet] = useState<number | null>(null);
+  const [bookletKey, setBookletKey] = useState(false);
+
   const rowKeys = (r: Row) => (r.kind === "wordsearch" ? [key(r.kind, r.id)] : r.indexes.map((i) => key(r.kind, r.id, i)));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const allKeys = useMemo(() => sections.flatMap((s) => s.rows.flatMap(rowKeys)), [sections]);
@@ -139,13 +148,62 @@ export default function PrintTab({ stage, content }: { stage: Stage; content: St
   // window.print() direkt – ett blad som skapades först vid utskriften hann
   // försvinna.
   function print() {
-    if (chapters.length) window.print();
+    if (!chapters.length) return;
+    // Tillbaka till det egna urvalet om ett häfte skrevs ut senast. flushSync:
+    // rätt blad måste finnas på plats före print() – på en iPad måste
+    // utskriftsrutan öppnas i själva klicket, inte efter en senare rendering.
+    flushSync(() => setBooklet(null));
+    window.print();
+  }
+
+  function printBooklet(index: number) {
+    flushSync(() => setBooklet(index));
+    window.print();
   }
 
   return (
     <div className="space-y-5 pb-10">
+      {booklets.length > 0 && (
+        <div className="card !p-4 sm:!p-5">
+          <h2 className="text-lg font-black text-en-900 dark:text-gray-100">📘 Färdiga arbetshäften</h2>
+          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+            Häften att skriva ut direkt, med en sida per ämne: en kort regel, fyra eller fem uppgifter och en ruta där
+            eleven fyller i hur bra hen kan det. Framsidan har innehållsförteckning, och sist finns ett ordsök.
+            Ett häfte ser likadant ut varje gång, så hela klassen får samma uppgifter.
+          </p>
+          <ul className="mt-3 divide-y divide-gray-100 dark:divide-gray-700">
+            {booklets.map((b, i) => (
+              <li key={b.number} className="py-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                <div className="flex-1 min-w-[12rem]">
+                  <p className="font-bold text-gray-900 dark:text-gray-100">
+                    Arbetshäfte {b.number} – {b.title}
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    {b.pageCount} sidor · {b.pages.map((p) => p.title).join(", ")}
+                  </p>
+                </div>
+                <button
+                  onClick={() => printBooklet(i)}
+                  className="px-3.5 py-2 rounded-xl font-bold text-sm text-white bg-en-600 hover:bg-en-700 cursor-pointer"
+                  style={{ boxShadow: "0 3px 0 0 rgba(0,0,0,0.18)" }}
+                >
+                  🖨️ Skriv ut
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <label className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border-2 border-en-200 dark:border-gray-600 text-sm font-bold text-gray-800 dark:text-gray-200 cursor-pointer">
+              <input type="checkbox" checked={bookletKey} onChange={(e) => setBookletKey(e.target.checked)} className="w-4 h-4 accent-en-600" />
+              Med facit
+            </label>
+            <span className="text-xs text-gray-600 dark:text-gray-400">Facit hamnar på egna sidor sist.</span>
+          </div>
+        </div>
+      )}
+
       <div className="card !p-4 sm:!p-5">
-        <h2 className="text-lg font-black text-en-900 dark:text-gray-100">🖨️ Skriva ut</h2>
+        <h2 className="text-lg font-black text-en-900 dark:text-gray-100">🖨️ Välj själv</h2>
         <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
           Bocka i de kapitel eller frågor du vill ha på papper, och tryck på <strong>Skriv ut</strong>. I
           utskriftsrutan kan du också välja <strong>Spara som PDF</strong>. Det du skriver ut ger inga poäng i appen.
@@ -203,7 +261,8 @@ export default function PrintTab({ stage, content }: { stage: Stage; content: St
         </section>
       ))}
 
-      {chapters.length > 0 && <PrintSheet stage={stage} chapters={chapters} withKey={withKey} />}
+      {chapters.length > 0 && <PrintSheet stage={stage} chapters={chapters} withKey={withKey} active={booklet === null} />}
+      {booklet !== null && booklets[booklet] && <BookletSheet stage={stage} booklet={booklets[booklet]} withKey={bookletKey} />}
     </div>
   );
 }

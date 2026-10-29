@@ -86,7 +86,7 @@ export default function OmPage() {
 
       {/* Banner */}
       <div
-        className="text-white"
+        className="relative overflow-hidden text-white"
         style={{ background: "linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6)" }}
       >
         <div className="max-w-3xl mx-auto px-4 py-6">
@@ -109,10 +109,10 @@ export default function OmPage() {
               href="https://martinsjakter.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="block rounded-xl overflow-hidden border-2 border-white/30 shadow-md hover:brightness-110 transition"
+              className="mj-banner"
               title="Martinsjakter – alla apparna"
             >
-              <img src="/martinsjakter-banner.webp" alt="Martinsjakter – gratis övningsappar för klassrummet och hemmet" className="h-14 sm:h-16 w-auto" />
+              <img src="/martinsjakter-banner.webp" alt="Martinsjakter – gratis övningsappar för klassrummet och hemmet" />
             </a>
           </div>
         </div>

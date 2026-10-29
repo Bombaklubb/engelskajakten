@@ -424,3 +424,28 @@
     opacity: 0.9;
   }
 }
+
+/* Martinsjakters banner på Om-sidan: fyller rubrikradens högra del och tonas
+   in i appens färg. På mobil ligger den på en egen rad under rubriken. */
+.mj-banner {
+  display: block;
+  width: 100%;
+  height: 4.5rem;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  transition: filter 0.2s;
+}
+.mj-banner:hover { filter: brightness(1.1); }
+.mj-banner img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+@media (min-width: 768px) {
+  .mj-banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 52%;
+    height: auto;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  }
+}

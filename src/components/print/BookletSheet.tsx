@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import type { Stage } from "@/lib/types";
 import type { Booklet } from "@/lib/booklets";
 import { ExerciseBody, WordGridTable } from "@/components/print/printItems";
+import MartinsjakterTag from "@/components/print/MartinsjakterTag";
 
 /**
  * Ett färdigt arbetshäfte (se lib/booklets.ts) som utskrivna sidor: framsida
@@ -57,6 +58,7 @@ export default function BookletSheet({ stage, booklet, withKey }: { stage: Stage
           fyller du i hur bra du tycker att du kan det.
         </p>
         <p className="ps-sub">engelskajakten.vercel.app</p>
+        <MartinsjakterTag />
       </section>
 
       {/* Ett ämne per sida */}

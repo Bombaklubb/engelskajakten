@@ -320,6 +320,12 @@
   .ps-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12pt; border-bottom: 1.5pt solid #111; padding-bottom: 6pt; margin-bottom: 12pt; }
   .ps-brand { font-size: 14pt; font-weight: 800; margin: 0; }
   .ps-sub { font-size: 8.5pt; margin: 0; color: #555 !important; }
+
+  /* Martinsjakters banner (MartinsjakterTag): sist på välj själv-bladet och på häftets framsida */
+  .mj-print { display: flex; align-items: center; gap: 10pt; margin-top: 14pt; padding-top: 8pt; border-top: 1pt solid #bbb; break-inside: avoid; }
+  .mj-print img { height: 15mm; width: auto; border-radius: 3pt; }
+  .mj-print p { font-size: 9.5pt; line-height: 1.35; margin: 0; text-align: left; }
+  .bk-cover .mj-print { justify-content: center; margin-top: 22pt; }
   .ps-name { display: flex; gap: 14pt; font-size: 10pt; white-space: nowrap; }
 
   .ps-chapter { margin-bottom: 12pt; }

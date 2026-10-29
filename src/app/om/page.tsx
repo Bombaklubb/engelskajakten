@@ -96,12 +96,24 @@ export default function OmPage() {
           >
             ← Tillbaka
           </Link>
-          <div className="flex items-center gap-3">
-            <UnionJack className="w-11 h-11 rounded-xl border-2 border-white/30" />
-            <div>
-              <h1 className="text-2xl font-black">Om Engelskajakten</h1>
-              <p className="text-white/80 text-sm">Så fungerar appen</p>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <UnionJack className="w-11 h-11 rounded-xl border-2 border-white/30" />
+              <div>
+                <h1 className="text-2xl font-black">Om Engelskajakten</h1>
+                <p className="text-white/80 text-sm">Så fungerar appen</p>
+              </div>
             </div>
+            {/* Martinsjakters banner – samma som på Buy Me a Coffee och på utskrifterna */}
+            <a
+              href="https://martinsjakter.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl overflow-hidden border-2 border-white/30 shadow-md hover:brightness-110 transition"
+              title="Martinsjakter – alla apparna"
+            >
+              <img src="/martinsjakter-banner.webp" alt="Martinsjakter – gratis övningsappar för klassrummet och hemmet" className="h-14 sm:h-16 w-auto" />
+            </a>
           </div>
         </div>
       </div>
@@ -231,6 +243,10 @@ export default function OmPage() {
             Bladet blir svart på vitt i A4, med rader för namn och datum, numrerade frågor, ringar att fylla
             i vid flervalsfrågor och skrivlinjer i luckorna. Ordsök skrivs ut som ett rutnät med en lista
             över orden att hitta. Svarsalternativen blandas, så bladet ser lite olika ut varje gång.
+          </p>
+          <p>
+            Längst ner på bladet och på häftets framsida står <strong>Martinsjakter</strong> med adressen
+            martinsjakter.vercel.app, så att den som får papperet hittar alla apparna.
           </p>
           <p>Det du skriver ut ger inga poäng i appen.</p>
         </Section>

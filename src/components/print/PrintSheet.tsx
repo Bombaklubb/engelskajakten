@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import type { GrammarExercise, Stage, WordSearchWord, CoinGameQuestion } from "@/lib/types";
 import { buildGrid } from "@/lib/wordGrid";
 import { ExerciseBody, WordGridTable, dealExercise, type DealtExercise } from "@/components/print/printItems";
+import MartinsjakterTag from "@/components/print/MartinsjakterTag";
 
 export type PrintChapter =
   | { kind: "exercises"; title: string; exercises: GrammarExercise[] }
@@ -64,6 +65,8 @@ export default function PrintSheet({
           {c.body(c.start)}
         </section>
       ))}
+
+      <MartinsjakterTag />
 
       {withKey && (
         <section className="ps-key">

@@ -54,6 +54,7 @@ export const metadata: Metadata = {
   description:
     "Engelskajakten är en gratis app för engelska från årskurs 1 till gymnasiet. Grammatikövningarna är samlade i fyra världar som eleverna tar sig igenom.",
   keywords: ["engelska", "skola", "övningar", "grammatik", "gratis"],
+  verification: { google: "YoKDShaiQmPmnuSGeu8LrQLg-8ztJzBXNFFscQZA5Xk" },
   icons: {
     // Favikonen ligger direkt i sidan (data-URI) i stället för som en fil, så
     // den kostar inget eget anrop. Samma bild som public/union-jack.svg.

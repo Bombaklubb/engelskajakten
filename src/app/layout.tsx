@@ -19,11 +19,41 @@ const FAVICON_SVG =
   "</svg>";
 const FAVICON_DATA_URI = `data:image/svg+xml,${encodeURIComponent(FAVICON_SVG)}`;
 
+// Strukturerad data (schema.org) som sökmotorer och AI-tjänster läser.
+const STRUKTURERAD_DATA = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Engelskajakten",
+  "url": "https://engelskajakten.vercel.app/",
+  "description": "Engelskajakten är en gratis app för engelska från årskurs 1 till gymnasiet. Grammatikövningarna är samlade i fyra världar som eleverna tar sig igenom.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Webbläsare: Chromebook, dator, surfplatta och mobil",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "SEK"
+  },
+  "educationalLevel": "Åk 1–gymnasiet",
+  "about": "Engelska",
+  "author": {
+    "@type": "Person",
+    "name": "Martin Akdogan",
+    "jobTitle": "Lärare",
+    "url": "https://martinsjakter.vercel.app"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Martinsjakter",
+    "url": "https://martinsjakter.vercel.app"
+  }
+}).replace(/</g, "\\u003c");
+
 export const metadata: Metadata = {
   title: "Engelskajakten – Lär dig engelska",
   description:
-    "En gratis engelskträningsapp för åk 1–gymnasiet. Grammatikövningar och läsförståelse i fyra spännande världar.",
-  keywords: ["engelska", "skola", "övningar", "grammatik", "läsförståelse", "gratis"],
+    "Engelskajakten är en gratis app för engelska från årskurs 1 till gymnasiet. Grammatikövningarna är samlade i fyra världar som eleverna tar sig igenom.",
+  keywords: ["engelska", "skola", "övningar", "grammatik", "gratis"],
   icons: {
     // Favikonen ligger direkt i sidan (data-URI) i stället för som en fil, så
     // den kostar inget eget anrop. Samma bild som public/union-jack.svg.
@@ -37,6 +67,10 @@ export const metadata: Metadata = {
     apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
   openGraph: {
+    title: "Engelskajakten",
+    description: "Grammatik på engelska i fyra världar.",
+    url: "https://engelskajakten.vercel.app/",
+    type: "website",
     images: [
       {
         url: "https://engelskajakten.vercel.app/engelskajakten-logo.png",
@@ -60,6 +94,7 @@ export default function RootLayout({
   return (
     <html lang="sv" suppressHydrationWarning>
       <body className="min-h-screen">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: STRUKTURERAD_DATA }} />
         <ThemedBackdrop />
         <AnalyticsInit />
         {children}

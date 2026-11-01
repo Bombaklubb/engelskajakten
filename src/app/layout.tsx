@@ -69,9 +69,13 @@ export const metadata: Metadata = {
     // PNG-varianten används där SVG inte fungerar. Safari, iPad och
     // hemskärmen kräver en PNG som apple-touch-icon – med SVG visade Safari
     // bara ett rött "E" i favoriterna.
+    // Google kan inte använda en ikon som ligger direkt i sidan (data-URI),
+    // bara en egen fil. PNG-filen står därför först, och /favicon.ico finns
+    // för de sökmotorer som letar där. robots.txt tillåter båda filerna.
     icon: [
-      { url: FAVICON_DATA_URI, type: "image/svg+xml" },
       { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: FAVICON_DATA_URI, type: "image/svg+xml" },
     ],
     apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },

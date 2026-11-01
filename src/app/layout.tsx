@@ -49,6 +49,14 @@ const STRUKTURERAD_DATA = JSON.stringify({
   }
 }).replace(/</g, "\\u003c");
 
+// Sajtens namn i Googles sökresultat (annars står det "Vercel").
+const WEBBPLATS = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Engelskajakten",
+  url: "https://engelskajakten.vercel.app/",
+});
+
 export const metadata: Metadata = {
   title: "Engelskajakten – Lär dig engelska",
   description:
@@ -69,6 +77,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Engelskajakten",
+    siteName: "Engelskajakten",
     description: "Grammatik på engelska i fyra världar.",
     url: "https://engelskajakten.vercel.app/",
     type: "website",
@@ -96,6 +105,7 @@ export default function RootLayout({
     <html lang="sv" suppressHydrationWarning>
       <body className="min-h-screen">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: STRUKTURERAD_DATA }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBBPLATS }} />
         <ThemedBackdrop />
         <AnalyticsInit />
         {children}

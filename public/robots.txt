@@ -4,4 +4,6 @@
 User-agent: *
 Allow: /$
 Allow: /om
+# Ikonen som Google visar i sökresultaten
+Allow: /icon-192.png
 Disallow: /

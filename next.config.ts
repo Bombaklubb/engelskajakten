@@ -54,6 +54,8 @@ export default function config(phase: string): NextConfig {
       // eleven går tillbaka från ett kapitel. "dynamic" gäller sidor som öppnas
       // utan förhämtning – alla länkar här har prefetch={false}.
       staleTimes: { dynamic: 3600, static: 3600 },
+      // All CSS i en fil i stället för en per import (typsnitt + globals.css).
+      cssChunking: false,
     },
     webpack(webpackConfig, { dev: isDev, isServer }) {
       // Färre och större kodfiler i webbläsaren. Next delar annars upp koden i
@@ -62,8 +64,14 @@ export default function config(phase: string): NextConfig {
       // så här många filer. Koden är densamma, bara uppdelad på färre filer.
       const split = webpackConfig.optimization?.splitChunks;
       if (!isDev && !isServer && split && typeof split === "object") {
-        split.maxInitialRequests = 4;
-        split.minSize = 60000;
+        split.maxInitialRequests = 3;
+        split.maxAsyncRequests = 3;
+        split.minSize = 150000;
+        // Next lägger annars React ("framework") och stora bibliotek ("lib")
+        // i egna filer, som blir två extra anrop vid första besöket.
+        if (split.cacheGroups && typeof split.cacheGroups === "object") {
+          split.cacheGroups = { ...split.cacheGroups, framework: false, lib: false };
+        }
       }
       return webpackConfig;
     },

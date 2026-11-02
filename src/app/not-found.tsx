@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
@@ -9,12 +7,12 @@ export default function NotFound() {
         <p className="text-gray-500 dark:text-gray-400 mb-6">
           Det verkar som att du har hittat en okänd del av kartan!
         </p>
-        <Link prefetch={false}
+        <a
           href="/"
           className="btn-primary bg-blue-600 hover:bg-blue-700 inline-flex"
         >
           ← Tillbaka till startsidan
-        </Link>
+        </a>
       </div>
     </div>
   );

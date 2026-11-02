@@ -10,7 +10,7 @@ export default function MartinsjakterTag() {
       <p>
         Fler gratis övningsappar för klassrummet och hemmet:
         <br />
-        <strong>martinsjakter.vercel.app</strong>
+        <strong>martinsjakter.se</strong>
       </p>
     </div>
   );

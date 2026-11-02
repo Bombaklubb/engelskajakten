@@ -40,12 +40,12 @@ const STRUKTURERAD_DATA = JSON.stringify({
     "@type": "Person",
     "name": "Martin Akdogan",
     "jobTitle": "Lärare",
-    "url": "https://martinsjakter.vercel.app"
+    "url": "https://martinsjakter.se"
   },
   "isPartOf": {
     "@type": "WebSite",
     "name": "Martinsjakter",
-    "url": "https://martinsjakter.vercel.app"
+    "url": "https://martinsjakter.se"
   }
 }).replace(/</g, "\\u003c");
 

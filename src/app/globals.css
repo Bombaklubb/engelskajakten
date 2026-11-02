@@ -384,7 +384,7 @@
 }
 
 /* Ram runt länken "Martins jakter" i samma färger som färgraden på
-   martinsjakter.vercel.app, men dämpade så att den inte sticker ut. Ramen
+   martinsjakter.se, men dämpade så att den inte sticker ut. Ramen
    ritas med en mask, så den fungerar på alla bakgrunder och teman. */
 .martins-jakter-ram {
   position: relative;

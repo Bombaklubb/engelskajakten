@@ -1,6 +1,6 @@
-// "Martins jakter" nere till höger: en länk till martinsjakter.vercel.app, där
+// "Martins jakter" nere till höger: en länk till martinsjakter.se, där
 // alla Martins appar finns samlade. Ersätter den tidigare menyn Jaktlänkar.
-export const MARTINS_JAKTER_URL = "https://martinsjakter.vercel.app";
+export const MARTINS_JAKTER_URL = "https://martinsjakter.se";
 
 export default function MartinsJakter() {
   return (

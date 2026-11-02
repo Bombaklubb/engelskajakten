@@ -106,7 +106,7 @@ export default function OmPage() {
             </div>
             {/* Martinsjakters banner – samma som på Buy Me a Coffee och på utskrifterna */}
             <a
-              href="https://martinsjakter.vercel.app"
+              href="https://martinsjakter.se"
               target="_blank"
               rel="noopener noreferrer"
               className="mj-banner"
@@ -246,7 +246,7 @@ export default function OmPage() {
           </p>
           <p>
             Längst ner på bladet och på häftets framsida står <strong>Martinsjakter</strong> med adressen
-            martinsjakter.vercel.app, så att den som får papperet hittar alla apparna.
+            martinsjakter.se, så att den som får papperet hittar alla apparna.
           </p>
           <p>Det du skriver ut ger inga poäng i appen.</p>
         </Section>

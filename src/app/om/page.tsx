@@ -133,7 +133,7 @@ export default function OmPage() {
           <p className="text-sm">
             Läsförståelse på engelska tränas i en separat app,{" "}
             <a
-              href="https://readhunt.vercel.app/"
+              href="https://readhunt.martinsjakter.se/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-bold text-en-600 dark:text-en-300 underline underline-offset-2 hover:text-en-700"

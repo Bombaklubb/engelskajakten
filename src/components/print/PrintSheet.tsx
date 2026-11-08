@@ -51,7 +51,7 @@ export default function PrintSheet({
       <header className="ps-header">
         <div>
           <p className="ps-brand">Engelskajakten · {stage.name} ({stage.grades})</p>
-          <p className="ps-sub">engelskajakten.vercel.app</p>
+          <p className="ps-sub">engelskajakten.martinsjakter.se</p>
         </div>
         <div className="ps-name">
           <span>Namn: ______________________</span>

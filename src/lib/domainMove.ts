@@ -26,8 +26,8 @@
  * (CompressionStream finns inte i synkron form).
  */
 
-/** Slås på när engelskajakten.martinsjakter.se fungerar. Tills dess beter sig den gamla adressen som förut. */
-const MOVE_ENABLED = false;
+/** På: engelskajakten.martinsjakter.se fungerar, så den gamla adressen skickar eleverna dit med sina framsteg. */
+const MOVE_ENABLED = true;
 
 export const DOMAIN_MOVE_SCRIPT = `(function(){try{
 var OLD="engelskajakten.vercel.app",NEW="https://engelskajakten.martinsjakter.se",ON=${MOVE_ENABLED},HK="enhet=",MAX=1500000,L=location,S=localStorage;

@@ -57,7 +57,7 @@ export default function BookletSheet({ stage, booklet, withKey }: { stage: Stage
           Varje sida börjar med en kort regel att komma ihåg. Sedan kommer uppgifterna, och längst ner
           fyller du i hur bra du tycker att du kan det.
         </p>
-        <p className="ps-sub">engelskajakten.vercel.app</p>
+        <p className="ps-sub">engelskajakten.martinsjakter.se</p>
         <MartinsjakterTag />
       </section>
 

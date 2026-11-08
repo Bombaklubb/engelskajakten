@@ -25,7 +25,7 @@ const STRUKTURERAD_DATA = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Engelskajakten",
-  "url": "https://engelskajakten.vercel.app/",
+  "url": "https://engelskajakten.martinsjakter.se/",
   "description": "Engelskajakten är en gratis app för engelska från årskurs 1 till gymnasiet. Grammatikövningarna är samlade i fyra världar som eleverna tar sig igenom.",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Webbläsare: Chromebook, dator, surfplatta och mobil",
@@ -55,7 +55,7 @@ const WEBBPLATS = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Engelskajakten",
-  url: "https://engelskajakten.vercel.app/",
+  url: "https://engelskajakten.martinsjakter.se/",
 });
 
 export const metadata: Metadata = {
@@ -84,11 +84,11 @@ export const metadata: Metadata = {
     title: "Engelskajakten",
     siteName: "Engelskajakten",
     description: "Grammatik på engelska i fyra världar.",
-    url: "https://engelskajakten.vercel.app/",
+    url: "https://engelskajakten.martinsjakter.se/",
     type: "website",
     images: [
       {
-        url: "https://engelskajakten.vercel.app/engelskajakten-logo.png",
+        url: "https://engelskajakten.martinsjakter.se/engelskajakten-logo.png",
         width: 1200,
         height: 630,
       },

@@ -39,9 +39,24 @@ function contentHashes(): Record<string, string> {
  * för filer med hash i namnet ligger därför sist, så att den inte skrivs över
  * av de bredare reglerna för bilder och json.
  */
+/**
+ * Cloudflare Pages sätter CF_PAGES=1 när den bygger. Där exporteras appen som
+ * vanliga filer (alla sidor är redan förbyggda), API-rutterna blir Pages
+ * Functions (functions/api/), och rewrites och headers görs av
+ * scripts/cloudflare-postbuild.mjs och public/_headers. På Vercel ändras inget.
+ */
+const CLOUDFLARE = process.env.CF_PAGES === "1";
+
 export default function config(phase: string): NextConfig {
   const dev = phase === PHASE_DEVELOPMENT_SERVER;
   return {
+    ...(CLOUDFLARE && {
+      output: "export" as const,
+      // Bara .tsx (och .jsx) är sidor, så API-rutterna (route.ts) lämnas utanför
+      // exporten. Cloudflare kör functions/api/ i deras ställe. Två ändelser:
+      // med en enda skickar Next den vidare som text och bygget går sönder.
+      pageExtensions: ["tsx", "jsx"],
+    }),
     env: {
       // Under utveckling används de vanliga filnamnen, så att ändrat innehåll
       // syns direkt utan omstart.
@@ -75,46 +90,49 @@ export default function config(phase: string): NextConfig {
       }
       return webpackConfig;
     },
-    async rewrites() {
-      return [
-        {
-          source: "/content/:stage/:name(content|rules)-:hash([0-9a-f]{12}).json",
-          destination: "/content/:stage/:name.json",
-        },
-      ];
-    },
-    async headers() {
-      return [
-        {
-          // Bilder som inte har hash i namnet: en vecka, sedan förnyas de i
-          // bakgrunden medan den gamla visas.
-          source: "/:all*(png|jpg|jpeg|webp|gif|svg|ico)",
-          headers: [
-            { key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=2592000" },
-          ],
-        },
-        {
-          // Innehållsfiler som hämtas med sitt vanliga namn (t.ex. manifest).
-          source: "/content/:all*(json)",
-          headers: [
-            { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
-          ],
-        },
-        {
-          // Sökrobotar hämtar robots.txt ofta; ett dygn räcker gott.
-          source: "/robots.txt",
-          headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
-        },
-        // ── Filer med hash i namnet: för alltid. MÅSTE stå sist. ──
-        {
-          source: "/sprites/:file*",
-          headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-        },
-        {
-          source: "/content/:stage/:name(content|rules)-:hash([0-9a-f]{12}).json",
-          headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-        },
-      ];
-    },
+    // Bara Vercel: en statisk export har inga rewrites eller headers (se ovan).
+    ...(!CLOUDFLARE && {
+      async rewrites() {
+        return [
+          {
+            source: "/content/:stage/:name(content|rules)-:hash([0-9a-f]{12}).json",
+            destination: "/content/:stage/:name.json",
+          },
+        ];
+      },
+      async headers() {
+        return [
+          {
+            // Bilder som inte har hash i namnet: en vecka, sedan förnyas de i
+            // bakgrunden medan den gamla visas.
+            source: "/:all*(png|jpg|jpeg|webp|gif|svg|ico)",
+            headers: [
+              { key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=2592000" },
+            ],
+          },
+          {
+            // Innehållsfiler som hämtas med sitt vanliga namn (t.ex. manifest).
+            source: "/content/:all*(json)",
+            headers: [
+              { key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" },
+            ],
+          },
+          {
+            // Sökrobotar hämtar robots.txt ofta; ett dygn räcker gott.
+            source: "/robots.txt",
+            headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+          },
+          // ── Filer med hash i namnet: för alltid. MÅSTE stå sist. ──
+          {
+            source: "/sprites/:file*",
+            headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+          },
+          {
+            source: "/content/:stage/:name(content|rules)-:hash([0-9a-f]{12}).json",
+            headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+          },
+        ];
+      },
+    }),
   };
 }

@@ -8,6 +8,7 @@ import "./globals.css";
 import AnalyticsInit from "@/components/AnalyticsInit";
 import MartinsJakter from "@/components/ui/MartinsJakter";
 import ThemedBackdrop from "@/components/ui/ThemedBackdrop";
+import { DOMAIN_MOVE_SCRIPT } from "@/lib/domainMove";
 
 const FAVICON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36">' +
@@ -107,6 +108,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv" suppressHydrationWarning>
+      <head>
+        {/* Först av allt: flytten till engelskajakten.martinsjakter.se (lib/domainMove.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: DOMAIN_MOVE_SCRIPT }} />
+      </head>
       <body className="min-h-screen">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: STRUKTURERAD_DATA }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBBPLATS }} />

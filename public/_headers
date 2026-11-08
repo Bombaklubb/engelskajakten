@@ -1,0 +1,50 @@
+# Cloudflare Pages: samma cache-regler som headers() i next.config.ts.
+# När flera regler gäller samma fil slår Cloudflare ihop deras rubriker. Därför
+# kommer den breda regeln först, och reglerna efter den börjar med
+# "! Cache-Control", som tar bort det en tidigare regel satt. Bilderna i
+# /content/ får då bildregeln (en vecka) och json-filerna där en timme, som på
+# Vercel.
+# Reglerna för innehållsfilerna med hash i namnet läggs till sist av
+# scripts/cloudflare-postbuild.mjs.
+
+/content/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/*.png
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.jpg
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.jpeg
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.webp
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.gif
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.svg
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/*.ico
+  ! Cache-Control
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/_next/static/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+/sprites/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable

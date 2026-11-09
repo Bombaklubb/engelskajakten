@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/generate-manifest.mjs && node scripts/check-sprites.mjs",
+    "prebuild": "node scripts/generate-manifest.mjs && node scripts/check-sprites.mjs && node scripts/check-content.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "sprites": "node scripts/build-sprites.mjs",
-    "test": "node scripts/check-sprites.mjs && node --experimental-strip-types --no-warnings --import ./tests/register.mjs --test tests/*.test.ts",
+    "test": "node scripts/check-sprites.mjs && node scripts/check-content.mjs && node --experimental-strip-types --no-warnings --import ./tests/register.mjs --test tests/*.test.ts",
     "postbuild": "node scripts/cloudflare-postbuild.mjs"
   },
   "dependencies": {

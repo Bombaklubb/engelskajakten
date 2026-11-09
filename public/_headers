@@ -48,3 +48,8 @@
 /sprites/*
   ! Cache-Control
   Cache-Control: public, max-age=31536000, immutable
+
+# Service workern ska aldrig fastna i en cache: en rättning måste nå eleverna
+# vid nästa sidladdning.
+/sw.js
+  Cache-Control: no-cache

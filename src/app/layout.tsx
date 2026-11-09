@@ -9,6 +9,7 @@ import AnalyticsInit from "@/components/AnalyticsInit";
 import MartinsJakter from "@/components/ui/MartinsJakter";
 import ThemedBackdrop from "@/components/ui/ThemedBackdrop";
 import { DOMAIN_MOVE_SCRIPT } from "@/lib/domainMove";
+import { OFFLINE_SCRIPT } from "@/lib/offline";
 
 const FAVICON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36">' +
@@ -115,6 +116,11 @@ export default function RootLayout({
       <body className="min-h-screen">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: STRUKTURERAD_DATA }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: WEBBPLATS }} />
+        {/* Sparar appens filer på enheten (lib/offline.ts). Inte under utveckling,
+            där sparade filer skulle dölja ändringar. */}
+        {process.env.NODE_ENV === "production" && (
+          <script dangerouslySetInnerHTML={{ __html: OFFLINE_SCRIPT }} />
+        )}
         <ThemedBackdrop />
         <AnalyticsInit />
         {children}

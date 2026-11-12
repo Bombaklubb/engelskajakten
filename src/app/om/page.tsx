@@ -395,6 +395,11 @@ export default function OmPage() {
               in en sparad fil.
             </li>
             <li>
+              <strong>Dela ett kapitel.</strong> Varje kapitel har en egen adress. Tryck på{" "}
+              <strong>Kopiera länken</strong> på kapitlets ruta och klistra in länken i till exempel Classroom.
+              Eleven som följer den skriver sitt namn och kommer rakt till kapitlet.
+            </li>
+            <li>
               Flera elever kan dela samma enhet. Var och en skriver sitt eget namn och har egna poäng,
               kistor och köp.
             </li>

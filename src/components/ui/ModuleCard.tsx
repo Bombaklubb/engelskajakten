@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import ProgressBar from "./ProgressBar";
-import { chapterHref } from "@/lib/chapterLink";
+import { chapterHref, chapterSharePath } from "@/lib/chapterLink";
+import CopyLinkButton from "./CopyLinkButton";
 import type { ModuleProgress, Stage } from "@/lib/types";
 import { MagicCard } from "@/components/magicui/magic-card";
 import { BorderBeam } from "@/components/magicui/border-beam";
@@ -65,25 +66,6 @@ function IconStar({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-const kindLabels: Record<string, { label: string; icon: React.ReactNode }> = {
-  grammar: {
-    label: "Grammatik",
-    icon: <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>,
-  },
-  spelling: {
-    label: "Stavning",
-    icon: <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>,
-  },
-  wordsearch: {
-    label: "Ordsökning",
-    icon: <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>,
-  },
-  spel: {
-    label: "Spel",
-    icon: <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-  },
-};
-
 export default function ModuleCard({
   id,
   title,
@@ -100,7 +82,6 @@ export default function ModuleCard({
   const href = chapterHref(stage.id, kind, id);
   const pct = progress?.completed ? 100 : 0;
   const beamColors = stageBeamColors[stage.id] ?? ["#6366f1", "#a855f7"];
-  const kindInfo = kindLabels[kind];
 
   // ── Locked ───────────────────────────────────────────────────────────────────
   if (locked) {
@@ -261,10 +242,7 @@ export default function ModuleCard({
                   <IconCheck className="w-3 h-3" /> Klar
                 </span>
               )}
-              <span className="badge bg-indigo-50 dark:bg-gray-700 text-indigo-600 dark:text-gray-300 text-xs ml-auto flex-shrink-0 border-2 border-indigo-100 dark:border-gray-600 flex items-center gap-1">
-                {kindInfo?.icon}
-                <span>{kindInfo?.label}</span>
-              </span>
+              <CopyLinkButton path={chapterSharePath(stage.id, kind, id)} title={title} />
             </div>
 
             <p className="text-sm mt-1 truncate font-medium text-indigo-600 dark:text-gray-300">{description}</p>

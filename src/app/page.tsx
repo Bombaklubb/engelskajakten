@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { AFTER_LOGIN_KEY, isChapterPath } from "@/lib/chapterLink";
 import Header from "@/components/ui/Header";
 import { loadStudent, createStudent, clearStudent, claimDailyBonus } from "@/lib/storage";
 import { STAGES } from "@/lib/stages";
@@ -84,6 +86,7 @@ function ProgressRing({ pct }: { pct: number }) {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [student,        setStudent]        = useState<StudentData | null>(null);
   const [nameInput,      setNameInput]      = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState("ninja");
@@ -122,6 +125,15 @@ export default function HomePage() {
     // annars blev den förvalda Ninjan, och figurer utanför de åtta på
     // inloggningen gick inte att få tillbaka.
     setStudent(createStudent(nameInput.trim(), returningName && !avatarPicked ? undefined : selectedAvatar));
+    // Kom eleven hit från en delad kapitellänk (se RequireStudent) går hen
+    // vidare till kapitlet direkt efter inloggningen.
+    try {
+      const target = sessionStorage.getItem(AFTER_LOGIN_KEY);
+      sessionStorage.removeItem(AFTER_LOGIN_KEY);
+      if (target && isChapterPath(target)) router.push(target);
+    } catch {
+      // ingen sparad adress
+    }
   }
 
   function handleLogout() {

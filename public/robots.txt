@@ -1,12 +1,15 @@
-# Sökmotorer får läsa startsidan och Om-sidan. Övriga sidor (världar, kapitel,
-# spel) är elevernas övningar: varje gång en sökrobot hämtar en av dem räknas
-# det mot appens gräns för anrop hos Vercel, och de behövs inte i sökresultaten.
+# Sökmotorer får läsa startsidan, Om-sidan, världarna och varje kapitels egen
+# sida. Övriga sidor (profil, affär, kistor, lärarvy) behövs inte i
+# sökresultaten.
 #
 # Ikonerna och sidans kod måste vara tillåtna: annars kan Google inte hämta
 # Engelskajaktens ikon och visar en jordglob bredvid träffen i sökresultaten.
 User-agent: *
 Allow: /$
 Allow: /om
+# Världarna och varje kapitels egen sida (se sitemap.xml)
+Allow: /world/
+Allow: /sitemap.xml
 Allow: /favicon.ico
 Allow: /icon-192.png
 Allow: /icon-512.png
@@ -14,3 +17,5 @@ Allow: /apple-touch-icon.png
 Allow: /engelskajakten-logo.png
 Allow: /_next/static/
 Disallow: /
+
+Sitemap: https://engelskajakten.martinsjakter.se/sitemap.xml

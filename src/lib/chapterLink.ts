@@ -21,3 +21,20 @@ export function chapterFromHash(hash: string): { kind: ChapterKind; id: string }
     return null;
   }
 }
+
+/**
+ * Kapitlets egen adress, den som delas och som sökmotorer hittar:
+ * /world/<värld>/<slag>/<id>. Sidan finns färdigbyggd för varje kapitel.
+ * Eleverna öppnar i stället kapitlen via chapterHref, utan sidbyte.
+ */
+export function chapterSharePath(stageId: string, kind: ChapterKind, moduleId: string): string {
+  return `/world/${stageId}/${kind}/${encodeURIComponent(moduleId)}`;
+}
+
+/** Nyckel i sessionStorage: kapitlet en utloggad besökare var på väg till. */
+export const AFTER_LOGIN_KEY = "engelskajakten_efter_inloggning";
+
+/** Bara kapiteladresser godtas som mål efter inloggningen. */
+export function isChapterPath(path: string): boolean {
+  return /^\/world\/[a-z]+\/(grammar|spelling|wordsearch|spel)\/[A-Za-z0-9_%-]+$/.test(path);
+}

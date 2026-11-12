@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { STAGES } from "./stages";
+import type { Metadata } from "next";
 import type { StageContent } from "./types";
 
 /**
@@ -24,4 +25,45 @@ export function moduleParams(kind: Kind): { stage: string; module: string }[] {
     for (const m of content[kind] ?? []) out.push({ stage: s.id, module: m.id });
   }
   return out;
+}
+
+export const SITE_URL = "https://engelskajakten.martinsjakter.se";
+
+const KIND_NAMES: Record<Kind, string> = {
+  grammar: "Grammatik",
+  spelling: "Stavning",
+  wordsearch: "Ordsökning",
+  spel: "Spel",
+};
+
+function readContent(stageId: string): StageContent {
+  const file = join(process.cwd(), "public", "content", stageId, "content.json");
+  return JSON.parse(readFileSync(file, "utf8")) as StageContent;
+}
+
+/**
+ * Egen titel och beskrivning för ett kapitels sida, så att en delad länk och
+ * en träff i en sökmotor säger vad kapitlet handlar om. Läses ur innehållet
+ * vid bygget.
+ */
+export function moduleMetadata(kind: Kind, stageId: string, moduleId: string): Metadata {
+  const stage = STAGES.find((s) => s.id === stageId);
+  const id = decodeURIComponent(moduleId);
+  const mod = stage ? (readContent(stageId)[kind] ?? []).find((m) => m.id === id) : undefined;
+  if (!stage || !mod) return {};
+  const title = `${mod.title} – ${KIND_NAMES[kind]} · Engelskajakten`;
+  const description = `${mod.description} ${KIND_NAMES[kind]} i ${stage.name} (${stage.grades}) i Engelskajakten – gratis övningar i engelska med rättning och förklaringar direkt.`;
+  const url = `${SITE_URL}/world/${stageId}/${kind}/${encodeURIComponent(id)}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, siteName: "Engelskajakten", type: "website" },
+  };
+}
+
+/** Alla kapitels adresser, för sitemap.xml. */
+export function allChapterPaths(): string[] {
+  const kinds: Kind[] = ["grammar", "spelling", "wordsearch", "spel"];
+  return kinds.flatMap((kind) => moduleParams(kind).map((p) => `/world/${p.stage}/${kind}/${encodeURIComponent(p.module)}`));
 }

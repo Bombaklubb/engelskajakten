@@ -32,6 +32,8 @@ export interface ShopAvatar {
   rarity: Rarity;
   price: number;
   group: AvatarGroup;
+  /** Egen bild i stället för emojin (sökväg under public/). Emojin visas där bilden inte ritas. */
+  image?: string;
 }
 
 export const AVATAR_GROUP_ORDER: AvatarGroup[] = [
@@ -120,6 +122,8 @@ export const SHOP_AVATARS: ShopAvatar[] = [
   { id: "av-melting", emoji: "🫠", name: "Smältande ansiktet", rarity: "rare", price: 400, group: "Roligt" },
   { id: "av-monkey", emoji: "🐒", name: "Busiga apan", rarity: "rare", price: 400, group: "Roligt" },
   { id: "av-cool", emoji: "😎", name: "Supercoola", rarity: "epic", price: 1000, group: "Roligt" },
+  // Klossgubben: en egen figur ritad som bild (public/avatars/klossgubbe.svg).
+  { id: "av-klossgubben", emoji: "🧱", name: "Klossgubben", rarity: "epic", price: 1000, group: "Roligt", image: "/avatars/klossgubbe.svg" },
 
   // ── Säsong ────────────────────────────────────────────────────────────────
   { id: "av-easter",     emoji: "🐇", name: "Påskhare",        rarity: "rare", price: 400, group: "Säsong" },

@@ -39,6 +39,6 @@ export function getAvatar(id: string): Avatar {
   const base = AVATARS.find((a) => a.id === id);
   if (base) return base;
   const shopAvatar = SHOP_AVATARS.find((a) => a.id === id);
-  if (shopAvatar) return { id: shopAvatar.id, emoji: shopAvatar.emoji, name: shopAvatar.name };
+  if (shopAvatar) return { id: shopAvatar.id, emoji: shopAvatar.emoji, name: shopAvatar.name, image: shopAvatar.image };
   return AVATARS[0];
 }

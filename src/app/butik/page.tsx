@@ -254,7 +254,7 @@ export default function ButikPage() {
   function avatarCard(a: ShopAvatar) {
     const owned = shop!.ownedAvatars.includes(a.id);
     const equipped = student!.avatar === a.id;
-    const previewAvatar = { id: a.id, emoji: a.emoji, name: a.name };
+    const previewAvatar = { id: a.id, emoji: a.emoji, name: a.name, image: a.image };
     return (
       <ItemCard
         key={a.id}
